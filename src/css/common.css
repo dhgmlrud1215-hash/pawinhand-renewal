@@ -7,6 +7,54 @@ body {
   padding-bottom: 80px;
 }
 
+.header {
+  height:60px;
+  padding: 0 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #fff;
+  border-bottom:1px solid #f1f1f1;
+}
+
+.logo img {
+  height: 20px;
+  display: block;
+}
+
+.header-icons {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.header-icons button {
+  border: 0;
+  background: none;
+  padding: 0;
+}
+
+.header-icons img {
+  width: 30px;
+  height: 30px;
+  display: block;
+  object-fit: contain;
+}
+
+.alarm-btn {
+  position: relative;
+}
+
+.notification-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #FF6B57;
+  position: absolute;
+  top: 4px;
+  right: 3px;
+}
+
 .bottom-nav {
   position: fixed;
   left: 0;
