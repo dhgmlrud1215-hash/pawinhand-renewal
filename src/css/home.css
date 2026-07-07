@@ -43,6 +43,7 @@
   background: #ff7a00;
 }
 
+/*===== QuickMenu =========*/
 .quick-menu {
   padding: 28px 16px 0;
 }
@@ -90,6 +91,9 @@
   white-space: pre-line;
 }
 
+/*===== HelpSection =========*/
+
+
 @media (min-width: 768px) {
   .home-layout {
     display: grid;
@@ -97,7 +101,7 @@
     column-gap: 32px;
     width: 100%;
     margin: 40px 0 0;
-    padding: 0 clamp(20px, 3vw, 48px) 0 32px;
+    padding: 0 clamp(20px, 3vw, 48px) 0 20px;
     box-sizing: border-box;
   }
 
@@ -134,12 +138,22 @@
     gap: 18px;
     overflow: visible;
   }
+
+  .home-content .home-section {
+    max-width: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .home-content .home-section + .home-section {
+    margin-top: 40px;
+  }
 }
 
 
 @media (min-width: 1024px) {
   .home-layout {
-    padding-left: 40px;
+    padding-left: 20px;
   }
 
   .main-banner {

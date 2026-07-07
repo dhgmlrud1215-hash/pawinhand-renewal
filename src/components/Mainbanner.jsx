@@ -3,10 +3,10 @@ import { useEffect, useState } from "react";
 
 function Mainbanner() {
   const banners = [
-    "/images/banner1.png",
-    "/images/banner2.png",
-    "/images/banner3.png",
-    "/images/banner4.png",
+    "/images/banner/banner1.png",
+    "/images/banner/banner2.png",
+    "/images/banner/banner3.png",
+    "/images/banner/banner4.png",
   ];
 
   const [current, setCurrent] = useState(0);

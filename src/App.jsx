@@ -5,6 +5,7 @@ import BottomNav from "./components/BottomNav";
 import Header from "./components/Header";
 import Mainbanner from "./components/Mainbanner";
 import QuickMenu from "./components/QuickMenu";
+import HelpSection from "./components/HelpSection";
 
 function App() {
   return (
@@ -15,7 +16,7 @@ function App() {
       <div className="home-layout">
         <QuickMenu />
         <main className="home-content">
-
+          <HelpSection />
         </main>
       </div>
       <BottomNav />

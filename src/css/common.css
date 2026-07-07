@@ -23,7 +23,32 @@ body {
 
 .home-section {
   padding: 0 16px;
-  margin-top: 20px;
+  margin-top: 32px;
+}
+
+.section-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 18px;
+}
+
+.section-title h2 {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.more-btn {
+  border: 0;
+  background: none;
+  padding: 0;
+  font-size: 13px;
+  color: #777;
+}
+
+.more-btn::after {
+  content: "›";
+  margin-left: 4px;
 }
 
 .logo img {
@@ -105,6 +130,29 @@ body {
   font-size:11px;
 }
 
+
+.section-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.section-title h2 {
+  font-size: 18px;
+}
+
+.section-title button {
+  border: 0;
+  background: none;
+  font-size: 13px;
+  color: #777;
+}
+
+.section-title button::after {
+  content: ">";
+  margin-left: 4px;
+
+}
 
 /* ===== Tablet ===== */
 @media (min-width: 768px) {
