@@ -9,8 +9,10 @@ import Mainbanner from "./components/Mainbanner";
 import QuickMenu from "./components/QuickMenu";
 import HelpSection from "./components/HelpSection";
 import AnimalDetail from "./pages/AnimalDetail";
+import CulturePage from "./pages/CulturePage";
 import ShelterBanner from "./components/ShelterBanner";
 import Youtubestory from "./components/YoutubeStory";
+import AdoptionCulture from "./components/AdoptionCulture";
 
 function App() {
   return (
@@ -30,6 +32,7 @@ function App() {
                   <HelpSection />
                   <ShelterBanner />
                   <Youtubestory />
+                  <AdoptionCulture />
                 </main>
               </div>
             </>
@@ -37,6 +40,9 @@ function App() {
         />
 
         <Route path="/animal/:id" element={<AnimalDetail />} />
+        <Route path="/campaign" element={<CulturePage category="campaign" />} />
+        <Route path="/donation" element={<CulturePage category="donation" />} />
+        <Route path="/volunteer" element={<CulturePage category="volunteer" />} />
       </Routes>
 
       <BottomNav />
