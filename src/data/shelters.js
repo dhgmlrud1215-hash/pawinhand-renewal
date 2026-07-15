@@ -1,0 +1,30 @@
+export const shelters = [
+  {
+    id: 1,
+    name: "포인핸드 경의숲점",
+    region: "서울특별시 마포구",
+    phone: "070-8657-4179",
+    verified: true,
+    image: "/images/shelters/shelter01.jpg",
+    latitude: 37.5562,
+    longitude: 126.9236,
+  },
+  {
+    id: 2,
+    name: "노원반려동물문화센터 댕댕하우스",
+    region: "서울특별시 노원구",
+    phone: "02-933-8500",
+    verified: true,
+    image: "/images/shelters/shelter02.jpeg",
+    latitude: 37.6541,
+    longitude: 127.0567,
+  },
+  {
+    id: 3,
+    name: "24시센트럴동물메디컬",
+    region: "서울특별시 성동구",
+    phone: "02-3395-7975",
+    latitude: 37.5495,
+    longitude: 127.0412,
+  },
+];

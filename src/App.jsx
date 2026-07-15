@@ -1,6 +1,8 @@
 import "./css/common.css";
 import "./css/home.css";
 import "./css/footer.css";
+import "./css/shelter.css";
+import "./css/shelterBanner.css";
 
 import { Routes, Route } from "react-router-dom";
 
@@ -19,6 +21,7 @@ import AnimalDetail from "./pages/AnimalDetail";
 import CulturePage from "./pages/CulturePage";
 import NewsList from "./pages/NewsList";
 import NewsDetail from "./pages/NewsDetail";
+import Shelters from "./pages/Shelters";
 
 function App() {
   return (
@@ -66,6 +69,7 @@ function App() {
 
         <Route path="/news" element={<NewsList />} />
         <Route path="/news/:id" element={<NewsDetail />} />
+        <Route path="/shelters" element={<Shelters />} />
       </Routes>
 
       <Footer />
