@@ -1,0 +1,168 @@
+
+.animal-stats {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 64px; 
+  z-index: 800;
+
+  width: 100%;
+  max-width: 430px;
+  margin: 0 auto;
+  padding: 12px 16px;
+
+  border-top: 1px solid #eeeeee;
+  background: rgba(255, 255, 255, 0.96);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 -6px 20px rgba(0, 0, 0, 0.08);
+}
+
+
+.animal-stats-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.animal-stats-top > strong {
+  color: #444444;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.animal-stats-top a {
+  color: #777777;
+  font-size: 11px;
+  text-decoration: none;
+}
+
+.animal-stats-top a span {
+  margin-left: 2px;
+}
+
+/* 통계 3칸 */
+.animal-stats-list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.animal-stat-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  min-width: 0;
+  padding: 2px 6px;
+  border-right: 1px solid #eeeeee;
+}
+
+.animal-stat-item:last-child {
+  border-right: none;
+}
+
+.animal-stat-item > span {
+  color: #222222;
+  font-size: 12px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.animal-stat-item strong {
+  color: #777777;
+  font-size: 11px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.animal-stat-item em {
+  margin-right: 2px;
+  color: #425ad4;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 800;
+}
+
+
+.animal-stat-item:first-child em {
+  color: #2ca875;
+}
+
+
+.animal-stat-item:nth-child(2) em {
+  color: #425ad4;
+}
+
+
+.animal-stat-item:last-child em {
+  color: #ff6f61;
+}
+
+
+@media (max-width: 767px) {
+  .app {
+    padding-bottom: 145px;
+  }
+}
+
+
+@media (min-width: 768px) {
+  .animal-stats {
+    left: 50%;
+    right: auto;
+    bottom: 24px;
+    transform: translateX(-50%);
+
+    width: 80%;
+    max-width: 1200px;
+    padding: 18px 28px;
+
+    border: 1px solid #eeeeee;
+    border-radius: 18px;
+    box-shadow: 0 10px 32px rgba(0, 0, 0, 0.12);
+  }
+
+  .animal-stats-top {
+    margin-bottom: 14px;
+  }
+
+  .animal-stats-top > strong {
+    font-size: 13px;
+  }
+
+  .animal-stats-top a {
+    font-size: 11px;
+  }
+
+  .animal-stats-list {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .animal-stat-item {
+    justify-content: center;
+    min-height: 34px;
+    padding: 0 18px;
+    border-right: 1px solid #eeeeee;
+    border-bottom: none;
+  }
+
+  .animal-stat-item:last-child {
+    border-right: none;
+  }
+
+  .animal-stat-item > span {
+    font-size: 13px;
+  }
+
+  .animal-stat-item strong {
+    font-size: 12px;
+  }
+
+  .animal-stat-item em {
+    font-size: 16px;
+  }
+
+  .app {
+    padding-bottom: 0;
+  }
+}

@@ -3,6 +3,7 @@ import "./css/home.css";
 import "./css/footer.css";
 import "./css/shelter.css";
 import "./css/shelterBanner.css";
+import "./css/animalstate.css";
 
 import { Routes, Route } from "react-router-dom";
 
@@ -16,6 +17,7 @@ import Youtubestory from "./components/YoutubeStory";
 import AdoptionCulture from "./components/AdoptionCulture";
 import NewsSection from "./components/NewsSection";
 import Footer from "./components/Footer";
+import AnimalStats from "./components/AnimalState";
 
 import AnimalDetail from "./pages/AnimalDetail";
 import CulturePage from "./pages/CulturePage";
@@ -46,6 +48,8 @@ function App() {
                   <NewsSection />
                 </main>
               </div>
+
+              <AnimalStats />
             </>
           }
         />

@@ -66,10 +66,18 @@ body {
   gap: 10px;
 }
 
-.header-icons button {
+.header-icons > button,
+.location-wrap > .location-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 30px;
+  height: 30px;
   border: 0;
   background: none;
   padding: 0;
+  line-height: 0;
 }
 
 .header-icons img {
@@ -95,6 +103,10 @@ body {
 
 .location-wrap {
   position: relative;
+  display: flex;
+  align-items: center;
+  width: 30px;
+  height: 30px;
 }
 
 .location-popup {
@@ -325,7 +337,8 @@ body {
   z-index: 100;
 }
 
-.bottom-nav button {
+.bottom-nav button,
+.bottom-nav a {
   border: none;
   background: none;
   font-size: 11px;
@@ -336,6 +349,16 @@ body {
   justify-content: center;
   gap: 6px;
   padding: 0;
+}
+
+.bottom-nav a.active {
+  color: #e96f00;
+  font-weight: 700;
+}
+
+.bottom-nav a.active img {
+  filter: invert(49%) sepia(98%) saturate(2678%) hue-rotate(5deg)
+    brightness(101%) contrast(103%);
 }
 
 .bottom-nav img {

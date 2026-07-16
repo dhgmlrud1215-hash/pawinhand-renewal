@@ -36,7 +36,7 @@ function Shelters() {
         );
 
   return (
-    <main className="shelter-page">
+    <main className="shelter-page" id="nearby-shelters">
       <div className="shelter-page-inner">
         <div className="shelter-page-head">
           <h1>내 주변 보호소 찾기</h1>

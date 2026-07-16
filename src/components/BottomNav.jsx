@@ -1,15 +1,26 @@
+import { NavLink } from "react-router-dom";
+
 function BottomNav() {
   return (
-    <nav className="bottom-nav">
-      <button className="active">
+    <nav className="bottom-nav" aria-label="주요 메뉴">
+      <NavLink
+        to="/"
+        end
+        className={({ isActive }) => isActive ? "active" : ""}
+        onClick={() => window.scrollTo(0, 0)}
+      >
         <img className="nav-icon" src="/icons/home.svg" alt="" />
         <span>홈</span>
-      </button>
+      </NavLink>
 
-      <button>
+      <NavLink
+        to="/shelters"
+        className={({ isActive }) => isActive ? "active" : ""}
+        onClick={() => window.scrollTo(0, 0)}
+      >
         <img className="nav-icon" src="/icons/shelter.svg" alt="" />
         <span>보호소</span>
-      </button>
+      </NavLink>
 
       <button>
         <img className="nav-icon" src="/icons/lost.svg" alt="" />
