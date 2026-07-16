@@ -21,12 +21,26 @@ function Mainbanner() {
   useEffect(() => {
     const timer = setInterval(() => {
       setIsSliding(true);
-      setDisplayIndex((prev) => prev + 1);
+      setDisplayIndex((prev) =>
+        prev >= banners.length + 1 ? 1 : prev + 1,
+      );
       setCurrent((prev) => (prev + 1) % banners.length);
     }, 4000);
 
     return () => clearInterval(timer);
   }, [banners.length]);
+
+  useEffect(() => {
+    if (displayIndex !== banners.length + 1) return undefined;
+
+    // 브라우저가 transitionend를 누락해도 트랙 밖으로 넘어가지 않도록 복구한다.
+    const fallbackTimer = setTimeout(() => {
+      setIsSliding(false);
+      setDisplayIndex(1);
+    }, 600);
+
+    return () => clearTimeout(fallbackTimer);
+  }, [displayIndex, banners.length]);
 
   const handleSlideEnd = (event) => {
     if (event.target !== event.currentTarget) return;
@@ -69,6 +83,9 @@ function Mainbanner() {
             key={index}
             src={banner}
             className={getRealIndex(index) === current ? "active" : ""}
+            loading={index <= 2 ? "eager" : "lazy"}
+            fetchPriority={index === 1 ? "high" : "auto"}
+            decoding="async"
             alt={`메인배너 ${index + 1}`}
           />
         ))}

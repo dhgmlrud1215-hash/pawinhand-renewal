@@ -36,6 +36,12 @@ function HamburgerMenu({ isOpen, onClose }) {
     },
   ];
 
+  const menuGroups = [
+    { title: "입양", items: menuItems.slice(0, 2) },
+    { title: "함께하기", items: menuItems.slice(2, 5) },
+    { title: "소식과 이야기", items: menuItems.slice(5) },
+  ];
+
   return (
     <div
       className={`hamburger-menu ${isOpen ? "open" : ""}`}
@@ -66,7 +72,9 @@ function HamburgerMenu({ isOpen, onClose }) {
 
         <div className="hamburger-login">
           <div className="hamburger-profile">
-            <span className="profile-icon">P</span>
+            <span className="profile-icon" aria-hidden="true">
+              <img src="/icons/my.svg" alt="" />
+            </span>
 
             <div>
               <strong>로그인해 주세요</strong>
@@ -86,16 +94,21 @@ function HamburgerMenu({ isOpen, onClose }) {
         </div>
 
         <nav className="hamburger-nav">
-          {menuItems.map((item) => (
-            <Link
-              to={item.path}
-              className="hamburger-menu-item"
-              key={item.title}
-              onClick={onClose}
-            >
-              <span>{item.title}</span>
-              <span className="menu-arrow">›</span>
-            </Link>
+          {menuGroups.map((group) => (
+            <div className="hamburger-nav-group" key={group.title}>
+              <p className="hamburger-nav-title">{group.title}</p>
+              {group.items.map((item) => (
+                <Link
+                  to={item.path}
+                  className="hamburger-menu-item"
+                  key={item.title}
+                  onClick={onClose}
+                >
+                  <span>{item.title}</span>
+                  <span className="menu-arrow">›</span>
+                </Link>
+              ))}
+            </div>
           ))}
         </nav>
 
