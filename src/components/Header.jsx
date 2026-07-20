@@ -2,9 +2,39 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import HamburgerMenu from "./HamburgerMenu";
 
+const STORE_OPEN_MINUTES = 11 * 60;
+const STORE_CLOSE_MINUTES = 19 * 60;
+
+function getSeoulMinutes(date) {
+  const parts = new Intl.DateTimeFormat("ko-KR", {
+    timeZone: "Asia/Seoul",
+    hour: "2-digit",
+    minute: "2-digit",
+    hourCycle: "h23",
+  }).formatToParts(date);
+  const hour = Number(parts.find((part) => part.type === "hour")?.value ?? 0);
+  const minute = Number(parts.find((part) => part.type === "minute")?.value ?? 0);
+
+  return hour * 60 + minute;
+}
+
 function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isLocationOpen, setIsLocationOpen] = useState(false);
+  const [currentTime, setCurrentTime] = useState(() => new Date());
+
+  const currentSeoulMinutes = getSeoulMinutes(currentTime);
+  const isStoreOpen =
+    currentSeoulMinutes >= STORE_OPEN_MINUTES &&
+    currentSeoulMinutes < STORE_CLOSE_MINUTES;
+
+  useEffect(() => {
+    const timerId = window.setInterval(() => {
+      setCurrentTime(new Date());
+    }, 60_000);
+
+    return () => window.clearInterval(timerId);
+  }, []);
 
   useEffect(() => {
     if (isMenuOpen) {
@@ -82,7 +112,16 @@ function Header() {
 
                   <div>
                     <span>운영시간</span>
-                    <p>영업 중 · 19:00 영업 종료</p>
+                    <p
+                      className={`location-business-hours ${
+                        isStoreOpen ? "open" : "closed"
+                      }`}
+                      aria-live="polite"
+                    >
+                      {isStoreOpen
+                        ? "영업 중 · 19:00 영업 종료"
+                        : "영업 종료 · 매일 11:00 영업 시작"}
+                    </p>
                   </div>
 
                   <div>

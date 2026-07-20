@@ -250,6 +250,18 @@ body {
   line-height: 1.5;
 }
 
+.location-details .location-business-hours {
+  font-weight: 700;
+}
+
+.location-business-hours.open {
+  color: #2f8f67;
+}
+
+.location-business-hours.closed {
+  color: #d9534f;
+}
+
 .location-map-link {
   display: flex;
   align-items: center;

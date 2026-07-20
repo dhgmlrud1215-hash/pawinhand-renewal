@@ -22,10 +22,14 @@ function BottomNav() {
         <span>보호소</span>
       </NavLink>
 
-      <button>
+      <NavLink
+        to="/lost"
+        className={({ isActive }) => (isActive ? "active" : "")}
+        onClick={() => window.scrollTo(0, 0)}
+      >
         <img className="nav-icon" src="/icons/lost.svg" alt="" />
         <span>실종/제보</span>
-      </button>
+      </NavLink>
 
       <button>
         <img className="nav-icon" src="/icons/story.svg" alt="" />

@@ -4,6 +4,7 @@ import "./css/footer.css";
 import "./css/shelter.css";
 import "./css/shelterBanner.css";
 import "./css/animalstate.css";
+import "./css/lost.css";
 
 import { Routes, Route } from "react-router-dom";
 
@@ -25,6 +26,7 @@ import CulturePage from "./pages/CulturePage";
 import NewsList from "./pages/NewsList";
 import NewsDetail from "./pages/NewsDetail";
 import Shelters from "./pages/Shelters";
+import LostReport  from "./pages/LostReport";
 
 function App() {
   return (
@@ -75,6 +77,7 @@ function App() {
         <Route path="/news" element={<NewsList />} />
         <Route path="/news/:id" element={<NewsDetail />} />
         <Route path="/shelters" element={<Shelters />} />
+        <Route path="/lost" element={<LostReport />} />
       </Routes>
 
       <Footer />

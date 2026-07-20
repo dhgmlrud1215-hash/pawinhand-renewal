@@ -1,0 +1,522 @@
+/* =========================
+   실종 / 제보 페이지
+========================= */
+
+.lost-page {
+  --lost-accent: #ff7a00;
+  --lost-missing: #e85d5d;
+  --lost-sighting: #e98516;
+  --lost-protection: #2f8f67;
+  min-height: 100vh;
+  padding: 40px 0 120px;
+  background: #fff;
+}
+
+.lost-page-inner {
+  width: min(100% - 32px, 1200px);
+  margin: 0 auto;
+}
+
+.lost-page-title {
+  margin-bottom: 28px;
+}
+
+.lost-page-title h1 {
+  margin: 0;
+  font-size: 30px;
+  font-weight: 800;
+  color: #222;
+}
+
+.lost-page-title p {
+  margin: 10px 0 0;
+  font-size: 15px;
+  color: #777;
+}
+
+
+.lost-search {
+  margin-bottom: 16px;
+}
+
+.lost-search input {
+  width: 100%;
+  height: 52px;
+  padding: 0 18px;
+  border: 1px solid #ddd;
+  border-radius: 14px;
+  background: #f8f8f8;
+  font-size: 15px;
+  color: #222;
+  outline: none;
+}
+
+.lost-search input::placeholder {
+  color: #999;
+}
+
+.lost-search input:focus {
+  border-color: var(--lost-accent);
+  background: #fff;
+}
+
+
+.lost-view-toggle {
+  display: flex;
+  justify-content: flex-end;
+  gap: 6px;
+  margin-bottom: 20px;
+}
+
+.lost-view-toggle button {
+  height: 38px;
+  padding: 0 14px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  background: #fff;
+  font-size: 14px;
+  color: #666;
+  cursor: pointer;
+}
+
+.lost-view-toggle button.active {
+  border-color: var(--lost-accent);
+  background: var(--lost-accent);
+  color: #fff;
+}
+
+
+.lost-list {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 32px 20px;
+}
+
+
+.lost-card {
+  display: block;
+  min-width: 0;
+  color: #222;
+  text-decoration: none;
+}
+
+.lost-card-image {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  border-radius: 16px;
+  background: #f2f2f2;
+}
+
+.lost-card-image img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.lost-card:hover .lost-card-image img {
+  transform: scale(1.04);
+}
+
+.lost-card-content {
+  padding-top: 12px;
+}
+
+.lost-card-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+
+.lost-card-title strong {
+  min-width: 0;
+  overflow: hidden;
+  font-size: 16px;
+  font-weight: 700;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.lost-card-badges {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  gap: 4px;
+}
+
+.status-badge,
+.current-status-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 22px;
+  padding: 0 7px;
+  border-radius: 5px;
+  font-size: 11px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.status-badge {
+  color: #fff;
+}
+
+.status-badge.sighting {
+  background: var(--lost-sighting);
+}
+
+.status-badge.missing {
+  background: var(--lost-missing);
+}
+
+.current-status-badge.protection {
+  background: #e8f6ef;
+  color: var(--lost-protection);
+}
+
+.current-status-badge.missing {
+  background: #fff0f0;
+  color: #c94747;
+}
+
+.current-status-badge.sighting {
+  background: #fff0dc;
+  color: #b86608;
+}
+
+.lost-card-info {
+  margin: 9px 0 0;
+  overflow: hidden;
+  font-size: 14px;
+  line-height: 1.45;
+  color: #666;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.lost-card-location,
+.lost-card-date {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 7px 0 0;
+  font-size: 13px;
+  line-height: 1.4;
+  color: #777;
+}
+
+.lost-card-location {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.lost-card-location span,
+.lost-card-date span {
+  flex-shrink: 0;
+  font-size: 11px;
+  color: #999;
+}
+
+/* 실종 / 목격 탭 */
+
+.lost-type-tabs {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.lost-type-tabs button {
+  min-width: 70px;
+  height: 40px;
+  padding: 0 18px;
+  border: 1px solid #ddd;
+  border-radius: 20px;
+  background: #fff;
+  color: #666;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.lost-type-tabs button.active {
+  border-color: var(--lost-accent);
+  background: var(--lost-accent);
+  color: #fff;
+}
+
+/* 실제 select 필터 */
+
+.lost-filter {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.lost-filter::-webkit-scrollbar {
+  display: none;
+}
+
+.lost-filter select {
+  flex-shrink: 0;
+  height: 40px;
+  padding: 0 36px 0 14px;
+  border: 1px solid #ddd;
+  border-radius: 20px;
+  background: #fff;
+  color: #555;
+  font-size: 14px;
+  cursor: pointer;
+  outline: none;
+}
+
+.lost-filter select:focus {
+  border-color: var(--lost-accent);
+}
+
+/* 검색 결과 수 */
+
+.lost-result-header {
+  margin-bottom: 16px;
+}
+
+.lost-result-header strong {
+  font-size: 15px;
+  color: #333;
+}
+
+/* 검색 결과 없음 */
+
+.lost-empty {
+  padding: 80px 20px;
+  border-radius: 16px;
+  background: #f8f8f8;
+  text-align: center;
+  color: #888;
+  font-size: 14px;
+}
+
+/* 지도 */
+
+.lost-map {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  border: 1px solid #e8e8e8;
+  border-radius: 18px;
+  background: #f5f5f5;
+}
+
+.lost-map-area {
+  width: 100%;
+  height: 600px;
+}
+
+.lost-map-info {
+  width: 190px;
+  padding: 4px;
+}
+
+.lost-map-info-inner {
+  padding: 10px 12px;
+  font-family: inherit;
+}
+
+.lost-map-info-badges {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 7px;
+}
+
+.lost-map-type,
+.lost-map-status {
+  display: inline-flex;
+  align-items: center;
+  min-height: 20px;
+  padding: 0 6px;
+  border-radius: 4px;
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.lost-map-type {
+  color: #fff;
+}
+
+.lost-map-type.sighting {
+  background: var(--lost-sighting);
+}
+
+.lost-map-type.missing {
+  background: var(--lost-missing);
+}
+
+.lost-map-status {
+  background: #e8f6ef;
+  color: var(--lost-protection);
+}
+
+.lost-map-status.sighting {
+  background: #fff0dc;
+  color: #b86608;
+}
+
+.lost-map-status.missing {
+  background: #fff0f0;
+  color: #c94747;
+}
+
+.lost-map-message {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: #fffaf5;
+  color: #777;
+  font-size: 14px;
+  text-align: center;
+}
+
+.lost-map-error {
+  flex-direction: column;
+  gap: 8px;
+  color: #6b5142;
+}
+
+.lost-map-error strong {
+  color: #3b2f29;
+  font-size: 17px;
+}
+
+.lost-map-error small {
+  color: #9a7c6b;
+}
+
+.lost-map-breed {
+  display: block;
+  margin-bottom: 5px;
+  font-size: 14px;
+  color: #222;
+}
+
+.lost-map-location,
+.lost-map-date {
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.5;
+  color: #666;
+}
+
+@media (max-width: 1024px) {
+  .lost-page {
+    padding-top: 32px;
+  }
+
+  .lost-list {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+
+
+@media (max-width: 767px) {
+  .lost-page {
+    padding: 24px 0 100px;
+  }
+
+  .lost-page-inner {
+    width: calc(100% - 32px);
+  }
+
+  .lost-page-title {
+    margin-bottom: 20px;
+  }
+
+  .lost-page-title h1 {
+    font-size: 24px;
+  }
+
+  .lost-page-title p {
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
+  .lost-search input {
+    height: 48px;
+    border-radius: 12px;
+    font-size: 14px;
+  }
+
+  .lost-filter {
+    margin-right: -16px;
+    padding-right: 16px;
+  }
+
+  .lost-view-toggle {
+    justify-content: flex-start;
+  }
+
+  .lost-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 26px 12px;
+  }
+
+  .lost-card-image {
+    border-radius: 12px;
+  }
+
+  .lost-card-content {
+    padding-top: 9px;
+  }
+
+  .lost-card-title {
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .lost-card-title strong {
+    width: 100%;
+    font-size: 15px;
+  }
+
+  .status-badge,
+  .current-status-badge {
+    height: 20px;
+    padding: 0 6px;
+    font-size: 10px;
+  }
+
+  .lost-card-info {
+    margin-top: 7px;
+    font-size: 13px;
+  }
+
+  .lost-card-location,
+  .lost-card-date {
+    margin-top: 5px;
+    font-size: 12px;
+  }
+
+  .lost-type-tabs button {
+    min-width: 64px;
+    height: 36px;
+    padding: 0 14px;
+    font-size: 13px;
+  }
+
+  .lost-filter select {
+    height: 36px;
+    font-size: 13px;
+  }
+
+  .lost-map-area {
+    height: 480px;
+  }
+}

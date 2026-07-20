@@ -99,8 +99,9 @@ function ShelterMap({ shelters }) {
 
     const script = document.createElement("script");
 
-    script.src = `https://dapi.kakao.com/v2/maps/sdk.js?appkey=${appKey}&autoload=false`;
+    script.src = `https://dapi.kakao.com/v2/maps/sdk.js?appkey=${appKey}&autoload=false&libraries=services`;
     script.async = true;
+    script.dataset.kakaoMap = "true";
     script.addEventListener("load", createMap);
     const handleScriptError = () => {
       setError("지도를 불러오지 못했습니다. 카카오 JavaScript 키와 등록 도메인을 확인해 주세요.");
