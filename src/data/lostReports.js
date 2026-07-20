@@ -163,6 +163,8 @@ export const lostReports = [
 
     region: "경기도 광주시 신현동",
     location: "e편한세상 단지 쪽",
+    latitude: 37.3574578,
+    longitude: 127.1453856,
 
     contact: "앱에서 확인해주세요.",
 
@@ -196,6 +198,8 @@ export const lostReports = [
 
     region: "경기도 남양주시",
     location: "월문리 284-1 인근",
+    latitude: 37.6140896,
+    longitude: 127.2725918,
 
     contact: "앱에서 확인해주세요.",
 

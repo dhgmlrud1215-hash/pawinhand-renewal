@@ -2,6 +2,8 @@ import { useEffect, useRef, useState } from "react";
 
 function LostMap({ reports }) {
   const mapRef = useRef(null);
+  const mapInstanceRef = useRef(null);
+  const reportBoundsRef = useRef(null);
   const appKey = import.meta.env.VITE_KAKAO_MAP_KEY;
   const [mapStatus, setMapStatus] = useState(
     appKey ? "loading" : "error"
@@ -9,24 +11,88 @@ function LostMap({ reports }) {
   const [mapError, setMapError] = useState(
     appKey ? "" : "카카오맵 JavaScript 키가 설정되지 않았습니다."
   );
+  const [mapLevel, setMapLevel] = useState(null);
+  const [isZooming, setIsZooming] = useState(false);
+
+  const showAllReportLocations = () => {
+    if (mapInstanceRef.current && reportBoundsRef.current) {
+      mapInstanceRef.current.setBounds(reportBoundsRef.current);
+    }
+  };
 
   useEffect(() => {
     if (!appKey) return;
 
+    const mapContainer = mapRef.current;
     const markers = [];
     const infoWindows = [];
     let map = null;
+    let wheelDelta = 0;
+    let wheelTimerId = null;
+    let zoomFeedbackTimerId = null;
+    let handleWheel = null;
+    let handleZoomChanged = null;
 
     const createMap = () => {
-      if (!window.kakao?.maps || !mapRef.current) {
+      if (!window.kakao?.maps || !mapContainer) {
         setMapStatus("error");
         setMapError("카카오맵 SDK를 불러오지 못했습니다.");
         return;
       }
 
-      map = new window.kakao.maps.Map(mapRef.current, {
+      map = new window.kakao.maps.Map(mapContainer, {
         center: new window.kakao.maps.LatLng(36.5, 127.8),
         level: 13,
+        scrollwheel: false,
+        tileAnimation: true,
+        keyboardShortcuts: true,
+      });
+      mapInstanceRef.current = map;
+
+      handleZoomChanged = () => {
+        setMapLevel(map.getLevel());
+        setIsZooming(true);
+
+        window.clearTimeout(zoomFeedbackTimerId);
+        zoomFeedbackTimerId = window.setTimeout(() => {
+          setIsZooming(false);
+        }, 450);
+      };
+
+      handleWheel = (event) => {
+        event.preventDefault();
+        wheelDelta += event.deltaY;
+
+        if (wheelTimerId !== null) return;
+
+        wheelTimerId = window.setTimeout(() => {
+          const direction = wheelDelta > 0 ? 1 : -1;
+          const nextLevel = Math.min(
+            14,
+            Math.max(1, map.getLevel() + direction)
+          );
+
+          wheelDelta = 0;
+
+          if (nextLevel !== map.getLevel()) {
+            map.setLevel(nextLevel, {
+              animate: { duration: 260 },
+            });
+          }
+
+          window.setTimeout(() => {
+            wheelTimerId = null;
+          }, 260);
+        }, 60);
+      };
+
+      window.kakao.maps.event.addListener(
+        map,
+        "zoom_changed",
+        handleZoomChanged
+      );
+      mapContainer.addEventListener("wheel", handleWheel, {
+        passive: false,
       });
 
       const bounds = new window.kakao.maps.LatLngBounds();
@@ -84,9 +150,11 @@ function LostMap({ reports }) {
       });
 
       if (markers.length > 0) {
+        reportBoundsRef.current = bounds;
         map.setBounds(bounds);
       }
 
+      setMapLevel(map.getLevel());
       setMapStatus("ready");
       setMapError("");
     };
@@ -132,14 +200,51 @@ function LostMap({ reports }) {
     }
 
     return () => {
+      window.clearTimeout(wheelTimerId);
+      window.clearTimeout(zoomFeedbackTimerId);
+
+      if (mapContainer && handleWheel) {
+        mapContainer.removeEventListener("wheel", handleWheel);
+      }
+
+      if (map && handleZoomChanged && window.kakao?.maps) {
+        window.kakao.maps.event.removeListener(
+          map,
+          "zoom_changed",
+          handleZoomChanged
+        );
+      }
+
       markers.forEach((marker) => marker.setMap(null));
       infoWindows.forEach((infoWindow) => infoWindow.close());
+      mapInstanceRef.current = null;
+      reportBoundsRef.current = null;
     };
   }, [appKey, reports]);
 
   return (
     <div className="lost-map">
       <div ref={mapRef} className="lost-map-area" />
+      {mapStatus === "ready" && mapLevel !== null && (
+        <>
+          <div
+            className={`lost-map-zoom-feedback ${isZooming ? "active" : ""}`}
+            aria-live="polite"
+          >
+            {isZooming ? "보기 범위 조정 중" : "마우스 휠로 범위 조정"}
+            <span>{mapLevel} / 14</span>
+          </div>
+          {reports.length > 1 && (
+            <button
+              type="button"
+              className="lost-map-show-all"
+              onClick={showAllReportLocations}
+            >
+              전체 위치 보기
+            </button>
+          )}
+        </>
+      )}
       {mapStatus === "loading" && (
         <div className="lost-map-message">지도를 불러오는 중입니다.</div>
       )}

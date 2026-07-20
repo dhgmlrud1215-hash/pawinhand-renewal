@@ -317,6 +317,58 @@
   height: 600px;
 }
 
+.lost-map-zoom-feedback {
+  position: absolute;
+  top: 14px;
+  left: 50%;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 10px;
+  border: 1px solid rgb(0 0 0 / 8%);
+  border-radius: 999px;
+  background: rgb(255 255 255 / 92%);
+  box-shadow: 0 4px 14px rgb(0 0 0 / 10%);
+  color: #666;
+  font-size: 12px;
+  pointer-events: none;
+  transform: translateX(-50%);
+  transition: color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.lost-map-zoom-feedback span {
+  color: var(--lost-accent);
+  font-weight: 800;
+}
+
+.lost-map-zoom-feedback.active {
+  box-shadow: 0 6px 18px rgb(255 122 0 / 18%);
+  color: #333;
+}
+
+.lost-map-show-all {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  z-index: 2;
+  height: 32px;
+  padding: 0 12px;
+  border: 1px solid rgb(0 0 0 / 10%);
+  border-radius: 8px;
+  background: rgb(255 255 255 / 94%);
+  box-shadow: 0 4px 14px rgb(0 0 0 / 10%);
+  color: #555;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.lost-map-show-all:hover {
+  border-color: var(--lost-accent);
+  color: var(--lost-accent);
+}
+
 .lost-map-info {
   width: 190px;
   padding: 4px;
