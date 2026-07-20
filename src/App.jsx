@@ -19,6 +19,7 @@ import NewsSection from "./components/NewsSection";
 import Footer from "./components/Footer";
 import AnimalStats from "./components/AnimalState";
 
+
 import AnimalDetail from "./pages/AnimalDetail";
 import CulturePage from "./pages/CulturePage";
 import NewsList from "./pages/NewsList";
