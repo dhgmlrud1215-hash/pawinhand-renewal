@@ -8,9 +8,18 @@ function AdoptionCulture() {
 
   const activeData = cultureData[activeTab];
   const visibleItems = activeData.type === "volunteer"
-    ? [...activeData.items]
-        .sort((a, b) => Date.parse(b.createdAt) - Date.parse(a.createdAt))
-        .slice(0, 2)
+    ? ["이동 봉사", "봉사 모집"]
+        .map((subCategory) =>
+          activeData.items
+            .filter(
+              (item) =>
+                (item.subCategory || "이동 봉사") === subCategory,
+            )
+            .sort(
+              (a, b) => Date.parse(b.createdAt) - Date.parse(a.createdAt),
+            )[0],
+        )
+        .filter(Boolean)
     : activeData.type === "campaign"
       ? activeData.items.slice(0, 2)
       : activeData.items;
@@ -21,7 +30,7 @@ function AdoptionCulture() {
 
   const moreLink =
     activeTab === "volunteer"
-      ? "/community?main=도움이 필요해요&sub=이동 봉사"
+      ? "/community?main=도움이 필요해요"
       : `/${activeTab}`;
 
   return (
@@ -98,10 +107,16 @@ function AdoptionCulture() {
               className="volunteer-card"
               key={item.id}
             >
+              <span className="volunteer-category">
+                {item.subCategory || "이동 봉사"}
+              </span>
+
               <div className="volunteer-top">
                 <strong>{item.author?.nickname || item.nickname}</strong>
                 <span>{getTimeAgo(item.createdAt)}</span>
               </div>
+
+              {item.title && <h3 className="volunteer-title">{item.title}</h3>}
 
               <div className="volunteer-route">
                 <div>

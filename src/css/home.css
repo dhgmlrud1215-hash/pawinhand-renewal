@@ -61,11 +61,15 @@
 }
 
 .quick-item {
+  display: block;
   border: 0;
   background: none;
+  color: inherit;
   padding: 0;
   min-width: 64px;
   text-align: center;
+  text-decoration: none;
+  cursor: pointer;
 }
 
 .quick-icon {
@@ -774,6 +778,20 @@
 /* 봉사활동 */
 .volunteer-card {
   padding: 16px;
+}
+
+.volunteer-category {
+  display: inline-block;
+  margin-bottom: 8px;
+  color: #ff7a00;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.volunteer-title {
+  margin: 0 0 14px;
+  font-size: 16px;
+  line-height: 1.4;
 }
 
 .volunteer-top {

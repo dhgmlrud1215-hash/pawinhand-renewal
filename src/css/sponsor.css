@@ -1,0 +1,12 @@
+.sponsor-image-page {
+  width: 100%;
+  max-width: 1083px;
+  margin: 0 auto;
+  background: #fff;
+}
+
+.sponsor-image {
+  display: block;
+  width: 100%;
+  height: auto;
+}

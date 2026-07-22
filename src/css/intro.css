@@ -1,0 +1,12 @@
+.intro-image-page {
+  width: 100%;
+  max-width: 1080px;
+  margin: 0 auto;
+  background: #fff;
+}
+
+.intro-image {
+  display: block;
+  width: 100%;
+  height: auto;
+}

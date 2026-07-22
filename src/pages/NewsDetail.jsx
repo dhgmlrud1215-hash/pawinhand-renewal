@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useParams } from "react-router-dom";
 import { newsData } from "../data/news";
+import PostDetailFooter from "../components/PostDetailFooter";
 
 function NewsDetail() {
   const { id } = useParams();
@@ -73,11 +74,7 @@ function NewsDetail() {
           )
         )}
 
-        {news.buttonLink && (
-          <a href={news.buttonLink}>
-            포인핸드 앱에서 보기
-          </a>
-        )}
+        <PostDetailFooter appLink={news.buttonLink} />
       </div>
     </main>
   );

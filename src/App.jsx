@@ -6,6 +6,8 @@ import "./css/shelterBanner.css";
 import "./css/animalstate.css";
 import "./css/lost.css";
 import "./css/community.css";
+import "./css/intro.css";
+import "./css/sponsor.css";
 
 import { Routes, Route } from "react-router-dom";
 
@@ -32,6 +34,8 @@ import Community from "./pages/Community";
 import CommunityDetail from "./pages/CommunityDetail";
 import RescueStoryDetail from "./pages/RescueStoryDetail";
 import RescueStoryList from "./pages/RescueStoryList";
+import Intro from "./pages/Intro";
+import Sponsor from "./pages/Sponsor";
 
 function App() {
   return (
@@ -63,6 +67,8 @@ function App() {
         />
 
         <Route path="/animal/:id" element={<AnimalDetail />} />
+        <Route path="/intro" element={<Intro />} />
+        <Route path="/sponsor" element={<Sponsor />} />
 
         <Route
           path="/campaign"

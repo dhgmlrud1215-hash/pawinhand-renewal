@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { communityData } from "../data/communityData";
 import { getTimeAgo } from "../utils/getTimeAgo";
+import PostDetailFooter from "../components/PostDetailFooter";
 
 function CommunityDetail() {
 
@@ -27,6 +28,8 @@ function CommunityDetail() {
   }
 
   const images = post.images || [];
+  const isTextOnly =
+    images.length === 0 && !post.animalNotice && !post.shelter;
 
   const handlePrevImage = () => {
     setCurrentImageIndex((prev) =>
@@ -71,8 +74,10 @@ function CommunityDetail() {
 
         <h1 className="community-detail-mobile-title">{post.title}</h1>
 
-        <div className="community-detail-layout">
-          <div className="community-detail-left-column">
+        <div
+          className={`community-detail-layout${isTextOnly ? " text-only" : ""}`}
+        >
+          {!isTextOnly && <div className="community-detail-left-column">
             <section className="community-detail-gallery">
               {images.length > 0 ? (
                 <div className="community-detail-main-image">
@@ -172,7 +177,7 @@ function CommunityDetail() {
                 </div>
               </section>
             )}
-          </div>
+          </div>}
 
           <div className="community-detail-right-column">
             <section className="community-detail-content">
@@ -214,16 +219,6 @@ function CommunityDetail() {
                 </Link>
               )}
 
-              {post.appLink && (
-                <a
-                  href={post.appLink}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="community-app-link"
-                >
-                  포인핸드 앱에서 보기
-                </a>
-              )}
             </section>
 
             {post.detailSections?.length > 0 && (
@@ -248,6 +243,11 @@ function CommunityDetail() {
             </div>
           </div>
         </div>
+
+        <PostDetailFooter
+          appLink={post.appLink}
+          align={isTextOnly ? "default" : "right-column"}
+        />
       </div>
     </main>
   );

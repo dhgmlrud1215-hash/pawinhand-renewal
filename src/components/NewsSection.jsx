@@ -10,7 +10,12 @@ function NewsSection() {
     <section className="news-section home-section">
       <div className="section-title">
         <h2>포인핸드 소식</h2>
-        <Link to="/news" className="more-btn">전체보기</Link>
+        <Link
+          to="/community?main=포인핸드 정보&sub=소식"
+          className="more-btn"
+        >
+          전체보기
+        </Link>
       </div>
 
       <div className="news-list">

@@ -105,10 +105,16 @@ function CulturePage({ category }) {
         {activeData.type === "volunteer" &&
           activeData.items.map((item) => (
             <article className="volunteer-card" key={item.id}>
+              <span className="volunteer-category">
+                {item.subCategory || "이동 봉사"}
+              </span>
+
               <div className="volunteer-top">
                 <strong>{item.author?.nickname || item.nickname}</strong>
                 <span>{getTimeAgo(item.createdAt)}</span>
               </div>
+
+              {item.title && <h3 className="volunteer-title">{item.title}</h3>}
 
               <div className="volunteer-route">
                 <div>

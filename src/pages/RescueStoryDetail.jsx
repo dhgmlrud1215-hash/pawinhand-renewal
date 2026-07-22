@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { rescueStoryData } from "../data/rescueStoryData";
 import { getTimeAgo } from "../utils/getTimeAgo";
+import PostDetailFooter from "../components/PostDetailFooter";
 
 function RescueStoryDetail() {
   const { id } = useParams();
@@ -89,6 +90,8 @@ function RescueStoryDetail() {
             <p key={paragraph}>{paragraph}</p>
           ))}
         </div>
+
+        <PostDetailFooter appLink={story.appLink} />
       </article>
     </main>
   );

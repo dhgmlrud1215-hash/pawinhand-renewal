@@ -1,21 +1,11 @@
 import { useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { communityData } from "../data/communityData";
+import { COMMUNITY_CATEGORIES } from "../data/communityCategories";
 import CommunityCard from "../components/CommunityCard";
+import CommunityTabs from "../components/CommunityTabs";
 
 const COMMUNITY_STATS_KEY = "pawinhand-community-stats";
-
-const COMMUNITY_CATEGORIES = {
-  "입양 이야기": ["전체", "입양 후기", "일상 공유", "고민 상담"],
-  "도움이 필요해요": [
-    "전체",
-    "입양 홍보",
-    "임보요청",
-    "이동 봉사",
-    "봉사 모집",
-  ],
-  "포인핸드 정보": ["전체", "입양 가이드", "앱 이용정보", "소식"],
-};
 
 const RELATIVE_TIME_UNITS = {
   분: 60 * 1000,
@@ -71,7 +61,7 @@ function syncPostsWithCommunityData(currentPosts) {
 }
 
 function Community() {
-  const [searchParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams();
   const requestedMainCategory = searchParams.get("main");
   const initialMainCategory = COMMUNITY_CATEGORIES[requestedMainCategory]
     ? requestedMainCategory
@@ -83,14 +73,23 @@ function Community() {
     ? requestedSubCategory
     : "전체";
 
-  const [mainCategory, setMainCategory] = useState(initialMainCategory);
-  const [subCategory, setSubCategory] = useState(initialSubCategory);
   const [posts, setPosts] = useState(getInitialPosts);
   const [sortReferenceTime] = useState(() => Date.now());
+  const mainCategory = initialMainCategory;
+  const subCategory = initialSubCategory;
 
   const handleMainCategory = (category) => {
-    setMainCategory(category);
-    setSubCategory("전체");
+    setSearchParams({ main: category });
+  };
+
+  const handleSubCategory = (category) => {
+    const nextParams = { main: mainCategory };
+
+    if (category !== "전체") {
+      nextParams.sub = category;
+    }
+
+    setSearchParams(nextParams);
   };
 
   const updatePostStats = (id, update) => {
@@ -150,31 +149,12 @@ function Community() {
       <div className="community-inner">
         <h1>커뮤니티</h1>
 
-        <div className="community-main-tabs">
-          {Object.keys(COMMUNITY_CATEGORIES).map((category) => (
-            <button
-              type="button"
-              key={category}
-              className={mainCategory === category ? "active" : ""}
-              onClick={() => handleMainCategory(category)}
-            >
-              {category}
-            </button>
-          ))}
-        </div>
-
-        <div className="community-sub-tabs">
-          {COMMUNITY_CATEGORIES[mainCategory].map((category) => (
-            <button
-              type="button"
-              key={category}
-              className={subCategory === category ? "active" : ""}
-              onClick={() => setSubCategory(category)}
-            >
-              {category}
-            </button>
-          ))}
-        </div>
+        <CommunityTabs
+          mainCategory={mainCategory}
+          subCategory={subCategory}
+          onMainCategoryChange={handleMainCategory}
+          onSubCategoryChange={handleSubCategory}
+        />
 
         <div className="community-content">
           <div className="community-list">

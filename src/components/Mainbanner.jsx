@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 
-function Mainbanner() {
+function Mainbanner({ variant = "default" }) {
   const banners = [
     "/images/banner/banner1.png",
     "/images/banner/banner2.png",
@@ -69,7 +69,9 @@ function Mainbanner() {
   };
 
   return (
-    <section className="main-banner">
+    <section
+      className={`main-banner${variant === "embedded" ? " embedded" : ""}`}
+    >
       <div
         className="banner-track"
         style={{
