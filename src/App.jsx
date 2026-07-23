@@ -8,6 +8,7 @@ import "./css/lost.css";
 import "./css/community.css";
 import "./css/intro.css";
 import "./css/sponsor.css";
+import "./css/benefit.css";
 
 import { Routes, Route } from "react-router-dom";
 
@@ -36,6 +37,8 @@ import RescueStoryDetail from "./pages/RescueStoryDetail";
 import RescueStoryList from "./pages/RescueStoryList";
 import Intro from "./pages/Intro";
 import Sponsor from "./pages/Sponsor";
+import BenefitList from "./pages/BenefitList";
+import BenefitDetail from "./pages/BenefitDetail";
 
 function App() {
   return (
@@ -69,6 +72,8 @@ function App() {
         <Route path="/animal/:id" element={<AnimalDetail />} />
         <Route path="/intro" element={<Intro />} />
         <Route path="/sponsor" element={<Sponsor />} />
+        <Route path="/benefit" element={<BenefitList />} />
+        <Route path="/benefit/:id" element={<BenefitDetail />} />
 
         <Route
           path="/campaign"

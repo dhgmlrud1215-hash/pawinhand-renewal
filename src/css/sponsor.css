@@ -1,4 +1,4 @@
-.sponsor-image-page {
+.sponsor-page {
   width: 100%;
   max-width: 1083px;
   margin: 0 auto;
@@ -9,4 +9,144 @@
   display: block;
   width: 100%;
   height: auto;
+}
+
+.sponsor-qna-section {
+  padding: 18px 24px 84px;
+  background: #f2f1ed;
+}
+
+.sponsor-cta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
+  min-height: 48px;
+  margin: 0 auto 38px;
+  padding: 0 22px;
+  border-radius: 4px;
+  background: #ff9500;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 800;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.sponsor-cta:hover {
+  background: #ed8500;
+  transform: translateY(-1px);
+}
+
+.sponsor-cta:focus-visible {
+  outline: 3px solid rgba(255, 122, 0, 0.35);
+  outline-offset: 3px;
+}
+
+.sponsor-qna-list {
+  overflow: hidden;
+  border-top: 1px solid #dedbd7;
+  border-bottom: 1px solid #dedbd7;
+  background: transparent;
+}
+
+.sponsor-qna-item + .sponsor-qna-item {
+  border-top: 1px solid #fff;
+}
+
+.sponsor-qna-item summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  min-height: 66px;
+  padding: 20px 18px;
+  color: #242424;
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.5;
+  list-style: none;
+  cursor: pointer;
+}
+
+.sponsor-qna-item summary::-webkit-details-marker {
+  display: none;
+}
+
+.sponsor-qna-item summary:focus-visible {
+  outline: 2px solid #ff7a00;
+  outline-offset: -3px;
+}
+
+.sponsor-qna-arrow {
+  width: 8px;
+  height: 8px;
+  flex: 0 0 auto;
+  border-right: 1.5px solid #5f6f76;
+  border-bottom: 1.5px solid #5f6f76;
+  transform: rotate(45deg);
+  transition: transform 0.2s ease;
+}
+
+.sponsor-qna-item[open] .sponsor-qna-arrow {
+  transform: rotate(225deg);
+}
+
+.sponsor-qna-answer {
+  padding: 2px 56px 28px 18px;
+  color: #4d4d4d;
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+.sponsor-qna-answer p {
+  margin: 0;
+}
+
+.sponsor-qna-answer a {
+  color: #f27400;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.sponsor-qna-answer > a {
+  display: inline-block;
+  margin-top: 16px;
+}
+
+.sponsor-qna-contact {
+  margin-top: 18px;
+}
+
+.sponsor-qna-contact p + p {
+  margin-top: 10px;
+}
+
+.sponsor-qna-note {
+  margin-top: 20px !important;
+  color: #777;
+  font-size: 13px;
+}
+
+@media (max-width: 767px) {
+  .sponsor-qna-section {
+    padding: 16px 14px 64px;
+  }
+
+  .sponsor-cta {
+    min-height: 44px;
+    margin-bottom: 30px;
+    padding: 0 18px;
+    font-size: 13px;
+  }
+
+  .sponsor-qna-item summary {
+    min-height: 62px;
+    padding: 18px 14px;
+    font-size: 14px;
+  }
+
+  .sponsor-qna-answer {
+    padding: 0 38px 24px 14px;
+    font-size: 13px;
+  }
 }

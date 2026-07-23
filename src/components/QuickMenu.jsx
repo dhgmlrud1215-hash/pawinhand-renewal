@@ -17,7 +17,11 @@ function QuickMenu() {
       title: "포인기부",
       path: "/donation",
     },
-    { image: "/images/quick/quick_benefit.png", title: "지원/혜택"},
+    {
+      image: "/images/quick/quick_benefit.png",
+      title: "지원/혜택",
+      path: "/benefit",
+    },
     {
       image: "/images/quick/quick_store.png",
       title: "포인핸드\n스토어",

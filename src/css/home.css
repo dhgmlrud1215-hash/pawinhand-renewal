@@ -61,7 +61,10 @@
 }
 
 .quick-item {
-  display: block;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 0 0 auto;
   border: 0;
   background: none;
   color: inherit;
@@ -90,6 +93,10 @@
 }
 
 .quick-name {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  min-height: 36px;
   font-size: 13px;
   line-height: 1.35;
   white-space: pre-line;
