@@ -9,6 +9,7 @@ import "./css/community.css";
 import "./css/intro.css";
 import "./css/sponsor.css";
 import "./css/benefit.css";
+import "./css/member.css";
 
 import { Routes, Route } from "react-router-dom";
 
@@ -39,6 +40,9 @@ import Intro from "./pages/Intro";
 import Sponsor from "./pages/Sponsor";
 import BenefitList from "./pages/BenefitList";
 import BenefitDetail from "./pages/BenefitDetail";
+import Login from "./pages/member/Login";
+import Join from "./pages/member/Join";
+import MyPage from "./pages/member/MyPage";
 
 function App() {
   return (
@@ -74,6 +78,10 @@ function App() {
         <Route path="/sponsor" element={<Sponsor />} />
         <Route path="/benefit" element={<BenefitList />} />
         <Route path="/benefit/:id" element={<BenefitDetail />} />
+
+        <Route path="/login" element={<Login />} />
+        <Route path="/join" element={<Join />} />
+        <Route path="/mypage" element={<MyPage />} />
 
         <Route
           path="/campaign"

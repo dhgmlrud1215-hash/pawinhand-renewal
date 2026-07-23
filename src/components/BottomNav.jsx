@@ -40,10 +40,15 @@ function BottomNav() {
         <span>커뮤니티</span>
       </NavLink>
 
-      <button>
+      <NavLink
+        to="/mypage"
+        className={({ isActive }) =>
+          isActive ? "bottom-nav-item active" : "bottom-nav-item"
+        }
+      >
         <img className="nav-icon" src="/icons/my.svg" alt="" />
         <span>마이</span>
-      </button>
+      </NavLink>
     </nav>
   );
 }
