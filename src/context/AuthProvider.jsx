@@ -9,7 +9,7 @@ import {
   saveMemberSession,
 } from "../utils/memberStorage";
 
-export function AuthProvider({ children }) {
+function AuthProvider({ children }) {
   const [member, setMember] = useState(() => getStoredMember());
   const [isLoading, setIsLoading] = useState(true);
 
@@ -73,3 +73,5 @@ export function AuthProvider({ children }) {
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }
+
+export default AuthProvider;

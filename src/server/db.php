@@ -11,12 +11,17 @@ if (session_status() !== PHP_SESSION_ACTIVE) {
 }
 
 $requestOrigin = $_SERVER["HTTP_ORIGIN"] ?? "";
-$allowedOrigins = array_filter(array_map(
-    "trim",
-    explode(",", getenv("FRONTEND_ORIGINS") ?: "http://localhost:5173,http://localhost:4173")
-));
 
-if ($requestOrigin && in_array($requestOrigin, $allowedOrigins, true)) {
+$isLocalhost =
+    $requestOrigin === "http://localhost:5173" ||
+    $requestOrigin === "http://localhost:4173";
+
+$isVercel = preg_match(
+    "/^https:\/\/[a-z0-9-]+\.vercel\.app$/i",
+    $requestOrigin
+);
+
+if ($isLocalhost || $isVercel) {
     header("Access-Control-Allow-Origin: {$requestOrigin}");
     header("Access-Control-Allow-Credentials: true");
     header("Vary: Origin");
