@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { getMemberSession, logoutMember } from "../api/memberApi";
-import { AuthContext } from "./authContext";
+import { AuthContext } from "./authStore";
 import {
   clearMemberSession,
   getStoredMember,

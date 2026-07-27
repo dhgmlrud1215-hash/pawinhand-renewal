@@ -15,7 +15,7 @@ import {
   getMemberCoverImage,
   getMemberProfileImage,
 } from "../../utils/memberStorage";
-import { useAuth } from "../../context/authContext";
+import { useAuth } from "../../context/authStore";
 
 const profileMenuGroups = [
   [
