@@ -14,8 +14,8 @@ import {
 import {
   getMemberCoverImage,
   getMemberProfileImage,
-  getStoredMember,
 } from "../../utils/memberStorage";
+import { useAuth } from "../../context/AuthContext";
 
 const profileMenuGroups = [
   [
@@ -79,7 +79,7 @@ function ProfileMenuGroup({ items }) {
 
 function Profile() {
   const navigate = useNavigate();
-  const member = getStoredMember();
+  const { member } = useAuth();
 
   if (!member) {
     return <Navigate to="/login" replace />;

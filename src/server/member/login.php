@@ -37,6 +37,8 @@ if (!$member || !password_verify($password, $member["password"])) {
 }
 
 unset($member["password"]);
+session_regenerate_id(true);
+$_SESSION["member_id"] = $member["id"];
 
 echo json_encode([
     "success" => true,

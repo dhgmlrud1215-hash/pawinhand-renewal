@@ -1,16 +1,13 @@
 import { Link, useNavigate } from "react-router-dom";
-import {
-  clearMemberSession,
-  getMemberProfileImage,
-  getStoredMember,
-} from "../utils/memberStorage";
+import { useAuth } from "../context/AuthContext";
+import { getMemberProfileImage } from "../utils/memberStorage";
 
 function HamburgerMenu({ isOpen, onClose }) {
   const navigate = useNavigate();
-  const member = getStoredMember();
+  const { member, signOut } = useAuth();
 
-  const handleLogout = () => {
-    clearMemberSession();
+  const handleLogout = async () => {
+    await signOut();
     onClose();
     navigate("/");
   };

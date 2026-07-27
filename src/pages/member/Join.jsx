@@ -5,12 +5,9 @@ import MemberForm from "../../components/member/MemberForm";
 import MemberInput from "../../components/member/MemberInput";
 import PasswordInput from "../../components/member/PasswordInput";
 import AgreementList from "../../components/member/AgreementList";
+import { checkMemberId, joinMember } from "../../api/memberApi";
 
 import "../../css/member.css";
-
-const MEMBER_API_BASE_URL =
-  import.meta.env.VITE_MEMBER_API_BASE_URL ||
-  "https://dhgmlrud00.dothome.co.kr/server/member";
 
 const initialForm = {
   userId: "",
@@ -86,9 +83,25 @@ function Join() {
       return;
     }
 
-    // PHP API 연결 전 임시 처리
-    setIdChecked(true);
-    setIdMessage("사용 가능한 아이디입니다.");
+    try {
+      const data = await checkMemberId(userId);
+      setIdChecked(data.available);
+      setIdMessage(data.message);
+
+      if (!data.available) {
+        setErrors((prev) => ({
+          ...prev,
+          userId: data.message,
+        }));
+      }
+    } catch (error) {
+      setIdChecked(false);
+      setIdMessage("");
+      setErrors((prev) => ({
+        ...prev,
+        userId: error.message,
+      }));
+    }
   };
 
   const validate = () => {
@@ -139,31 +152,7 @@ function Join() {
     if (!validate()) return;
 
     try {
-      const response = await fetch(`${MEMBER_API_BASE_URL}/join.php`, {
-        method: "POST",
-        headers: {
-          // PHP reads the raw body, so this remains JSON while avoiding the
-          // OPTIONS preflight unsupported by the current hosting server.
-          "Content-Type": "text/plain;charset=UTF-8",
-        },
-        body: JSON.stringify({
-          ...form,
-          marketing: agreements.marketing,
-        }),
-      });
-
-      const responseText = await response.text();
-      let data;
-
-      try {
-        data = JSON.parse(responseText);
-      } catch {
-        throw new Error("서버 응답을 확인할 수 없습니다.");
-      }
-
-      if (!response.ok) {
-        throw new Error(data.message || "회원가입 요청에 실패했습니다.");
-      }
+      const data = await joinMember(form, agreements);
 
       alert(data.message);
 

@@ -1,9 +1,11 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { saveMemberSession } from "../../utils/memberStorage";
+import { loginMember } from "../../api/memberApi";
+import { useAuth } from "../../context/authContext";
 
 function Login() {
   const navigate = useNavigate();
+  const { signIn } = useAuth();
 
   const [userId, setUserId] = useState("");
   const [password, setPassword] = useState("");
@@ -17,26 +19,12 @@ function Login() {
     }
 
     try {
-      const response = await fetch(
-        "http://dhgmlrud00.dothome.co.kr/server/member/login.php",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            userId,
-            password,
-          }),
-        }
-      );
-
-      const data = await response.json();
+      const data = await loginMember(userId, password);
 
       alert(data.message);
 
       if (data.success) {
-        saveMemberSession(data.member);
+        signIn(data.member);
         navigate("/mypage");
       }
     } catch (error) {

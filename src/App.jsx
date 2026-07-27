@@ -45,6 +45,7 @@ import Join from "./pages/member/Join";
 import MyPage from "./pages/member/MyPage";
 import Profile from "./pages/member/Profile";
 import EditProfile from "./pages/member/EditProfile";
+import ProtectedRoute from "./components/member/ProtectedRoute";
 
 function App() {
   return (
@@ -84,8 +85,22 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/join" element={<Join />} />
         <Route path="/mypage" element={<MyPage />} />
-        <Route path="/mypage/profile" element={<Profile />} />
-        <Route path="/mypage/edit" element={<EditProfile />} />
+        <Route
+          path="/mypage/profile"
+          element={
+            <ProtectedRoute>
+              <Profile />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/mypage/edit"
+          element={
+            <ProtectedRoute>
+              <EditProfile />
+            </ProtectedRoute>
+          }
+        />
 
         <Route
           path="/campaign"

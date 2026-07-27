@@ -1,6 +1,27 @@
 <?php
 
-header("Access-Control-Allow-Origin: *");
+if (session_status() !== PHP_SESSION_ACTIVE) {
+    session_set_cookie_params([
+        "httponly" => true,
+        "secure" => !empty($_SERVER["HTTPS"]) && $_SERVER["HTTPS"] !== "off",
+        "samesite" => !empty($_SERVER["HTTPS"]) ? "None" : "Lax",
+        "path" => "/"
+    ]);
+    session_start();
+}
+
+$requestOrigin = $_SERVER["HTTP_ORIGIN"] ?? "";
+$allowedOrigins = array_filter(array_map(
+    "trim",
+    explode(",", getenv("FRONTEND_ORIGINS") ?: "http://localhost:5173,http://localhost:4173")
+));
+
+if ($requestOrigin && in_array($requestOrigin, $allowedOrigins, true)) {
+    header("Access-Control-Allow-Origin: {$requestOrigin}");
+    header("Access-Control-Allow-Credentials: true");
+    header("Vary: Origin");
+}
+
 header("Access-Control-Allow-Methods: POST, GET, OPTIONS");
 header("Access-Control-Allow-Headers: Content-Type");
 header("Content-Type: application/json; charset=UTF-8");
@@ -10,7 +31,6 @@ if ($_SERVER["REQUEST_METHOD"] === "OPTIONS") {
     exit;
 }
 
-$host = "localhost";
 $host = "localhost";
 $dbName = "dhgmlrud00";
 $dbUser = "dhgmlrud00";

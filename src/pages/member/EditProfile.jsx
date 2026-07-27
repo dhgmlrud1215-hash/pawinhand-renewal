@@ -1,13 +1,12 @@
 import { useRef, useState } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
 import { Camera, ChevronLeft, X } from "lucide-react";
+import { updateMember } from "../../api/memberApi";
+import { useAuth } from "../../context/AuthContext";
 import {
-  clearMemberSession,
   DEFAULT_PROFILE_IMAGE,
   getMemberCoverImage,
   getMemberProfileImage,
-  getStoredMember,
-  saveMemberProfile,
 } from "../../utils/memberStorage";
 
 const interestOptions = [
@@ -51,9 +50,9 @@ function resizeImage(file, maxWidth, maxHeight, quality = 0.82) {
 
 function EditProfile() {
   const navigate = useNavigate();
+  const { member, saveProfile, signOut } = useAuth();
   const profileImageInput = useRef(null);
   const coverImageInput = useRef(null);
-  const member = getStoredMember();
   const [form, setForm] = useState(() => ({
     nickname: member?.nickname || "",
     phone: member?.phone || "",
@@ -112,14 +111,16 @@ function EditProfile() {
     }
   };
 
-  const handleSave = () => {
+  const handleSave = async () => {
     if (!form.nickname.trim()) {
       alert("닉네임을 입력해주세요.");
       return;
     }
 
+    let savedMember;
+
     try {
-      saveMemberProfile({
+      savedMember = saveProfile({
         ...form,
         nickname: form.nickname.trim(),
         introduction: form.introduction.trim(),
@@ -129,12 +130,26 @@ function EditProfile() {
       return;
     }
 
+    try {
+      await updateMember({
+        nickname: savedMember.nickname,
+        email: savedMember.email,
+        phone: savedMember.phone || "",
+      });
+    } catch {
+      alert(
+        "화면 정보는 저장했지만 서버 회원정보를 업데이트하지 못했습니다.",
+      );
+      navigate("/mypage/profile");
+      return;
+    }
+
     alert("프로필 정보가 수정되었습니다.");
     navigate("/mypage/profile");
   };
 
-  const handleLogout = () => {
-    clearMemberSession();
+  const handleLogout = async () => {
+    await signOut();
     alert("로그아웃되었습니다.");
     navigate("/");
   };
