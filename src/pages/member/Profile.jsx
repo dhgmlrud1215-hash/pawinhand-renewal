@@ -11,6 +11,11 @@ import {
   Share2,
   ShieldBan,
 } from "lucide-react";
+import {
+  getMemberCoverImage,
+  getMemberProfileImage,
+  getStoredMember,
+} from "../../utils/memberStorage";
 
 const profileMenuGroups = [
   [
@@ -54,16 +59,6 @@ const profileMenuGroups = [
   ],
 ];
 
-function getSavedMember() {
-  try {
-    const savedMember = localStorage.getItem("member");
-    return savedMember ? JSON.parse(savedMember) : null;
-  } catch {
-    localStorage.removeItem("member");
-    return null;
-  }
-}
-
 function ProfileMenuGroup({ items }) {
   return (
     <section className="profile-menu-group">
@@ -84,13 +79,14 @@ function ProfileMenuGroup({ items }) {
 
 function Profile() {
   const navigate = useNavigate();
-  const member = getSavedMember();
+  const member = getStoredMember();
 
   if (!member) {
     return <Navigate to="/login" replace />;
   }
 
   const nickname = member.nickname || member.name || member.user_id;
+  const coverImage = getMemberCoverImage(member);
 
   return (
     <main className="profile-page">
@@ -104,16 +100,18 @@ function Profile() {
         </button>
       </header>
 
-      <section className="profile-hero">
-        <img
-          className="profile-cover-image"
-          src={
-            member.coverImage ||
-            member.cover_image ||
-            "/images/animals/animal01-4.jpg"
-          }
-          alt=""
-        />
+      <section
+        className={`profile-hero${
+          coverImage ? "" : " profile-hero-empty"
+        }`}
+      >
+        {coverImage && (
+          <img
+            className="profile-cover-image"
+            src={coverImage}
+            alt=""
+          />
+        )}
         <div className="profile-cover-shade" />
 
         <Link
@@ -127,11 +125,7 @@ function Profile() {
         <div className="profile-identity">
           <img
             className="profile-avatar-image"
-            src={
-              member.profileImage ||
-              member.profile_image ||
-              "/images/animals/animal01-4.jpg"
-            }
+            src={getMemberProfileImage(member)}
             alt={`${nickname} 프로필`}
           />
           <strong>{nickname}</strong>

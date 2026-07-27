@@ -1,8 +1,15 @@
 import { useRef, useState } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
 import { Camera, ChevronLeft, X } from "lucide-react";
+import {
+  clearMemberSession,
+  DEFAULT_PROFILE_IMAGE,
+  getMemberCoverImage,
+  getMemberProfileImage,
+  getStoredMember,
+  saveMemberProfile,
+} from "../../utils/memberStorage";
 
-const DEFAULT_PROFILE_IMAGE = "/images/animals/animal01-4.jpg";
 const interestOptions = [
   "입양",
   "후원",
@@ -11,16 +18,6 @@ const interestOptions = [
   "봉사",
   "이동봉사",
 ];
-
-function getSavedMember() {
-  try {
-    const savedMember = localStorage.getItem("member");
-    return savedMember ? JSON.parse(savedMember) : null;
-  } catch {
-    localStorage.removeItem("member");
-    return null;
-  }
-}
 
 function resizeImage(file, maxWidth, maxHeight, quality = 0.82) {
   return new Promise((resolve, reject) => {
@@ -56,7 +53,7 @@ function EditProfile() {
   const navigate = useNavigate();
   const profileImageInput = useRef(null);
   const coverImageInput = useRef(null);
-  const member = getSavedMember();
+  const member = getStoredMember();
   const [form, setForm] = useState(() => ({
     nickname: member?.nickname || "",
     phone: member?.phone || "",
@@ -67,14 +64,8 @@ function EditProfile() {
       member?.bio ||
       member?.self_introduction ||
       "사지말고 입양하세요.",
-    profileImage:
-      member?.profileImage ||
-      member?.profile_image ||
-      DEFAULT_PROFILE_IMAGE,
-    coverImage:
-      member?.coverImage ||
-      member?.cover_image ||
-      DEFAULT_PROFILE_IMAGE,
+    profileImage: member ? getMemberProfileImage(member) : DEFAULT_PROFILE_IMAGE,
+    coverImage: member ? getMemberCoverImage(member) : "",
   }));
   const [imageError, setImageError] = useState("");
 
@@ -128,19 +119,11 @@ function EditProfile() {
     }
 
     try {
-      localStorage.setItem(
-        "member",
-        JSON.stringify({
-          ...member,
-          ...form,
-          nickname: form.nickname.trim(),
-          introduction: form.introduction.trim(),
-          profileImage: form.profileImage,
-          profile_image: form.profileImage,
-          coverImage: form.coverImage,
-          cover_image: form.coverImage,
-        }),
-      );
+      saveMemberProfile({
+        ...form,
+        nickname: form.nickname.trim(),
+        introduction: form.introduction.trim(),
+      });
     } catch {
       alert("이미지 용량이 너무 큽니다. 다른 이미지를 선택해주세요.");
       return;
@@ -151,7 +134,7 @@ function EditProfile() {
   };
 
   const handleLogout = () => {
-    localStorage.removeItem("member");
+    clearMemberSession();
     alert("로그아웃되었습니다.");
     navigate("/");
   };
@@ -169,9 +152,18 @@ function EditProfile() {
         </button>
       </header>
 
-      <section className="profile-edit-images">
-        <img src={form.coverImage} alt="커버 이미지 미리보기" />
+      <section
+        className={`profile-edit-images${form.coverImage ? "" : " is-empty"}`}
+      >
+        {form.coverImage && (
+          <img src={form.coverImage} alt="커버 이미지 미리보기" />
+        )}
         <div className="profile-edit-image-shade" />
+        {!form.coverImage && (
+          <p className="profile-edit-cover-placeholder">
+            커버 사진을 설정해보세요.
+          </p>
+        )}
 
         <div className="profile-edit-point">
           <span>P</span>

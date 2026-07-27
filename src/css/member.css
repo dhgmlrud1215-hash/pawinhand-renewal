@@ -636,6 +636,30 @@
   height: 100%;
 }
 
+.profile-hero-empty {
+  background: #f1eee9;
+}
+
+.profile-hero-empty .profile-cover-shade {
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.1),
+    rgba(70, 58, 48, 0.12)
+  );
+}
+
+.profile-hero-empty .profile-identity {
+  color: #333;
+}
+
+.profile-hero-empty .profile-follow-stats {
+  border-top-color: rgba(70, 58, 48, 0.22);
+}
+
+.profile-hero-empty .profile-settings-button {
+  color: #ff7a00;
+}
+
 .profile-cover-image {
   object-fit: cover;
   object-position: center 42%;
@@ -864,6 +888,33 @@
   height: 100%;
   object-fit: cover;
   object-position: center 45%;
+}
+
+.profile-edit-images.is-empty {
+  background: #f1eee9;
+}
+
+.profile-edit-images.is-empty .profile-edit-image-shade {
+  display: none;
+}
+
+.profile-edit-cover-placeholder {
+  position: absolute;
+  top: 24px;
+  left: 24px;
+  z-index: 1;
+  color: #8b8178;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.profile-edit-images.is-empty .profile-edit-point,
+.profile-edit-images.is-empty .profile-edit-email {
+  color: #554d46;
+}
+
+.profile-edit-images.is-empty .profile-edit-cover-button {
+  color: #ff7a00;
 }
 
 .profile-edit-image-shade {

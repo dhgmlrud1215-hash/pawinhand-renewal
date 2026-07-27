@@ -1,18 +1,16 @@
 import { Link, useNavigate } from "react-router-dom";
+import {
+  clearMemberSession,
+  getMemberProfileImage,
+  getStoredMember,
+} from "../utils/memberStorage";
 
 function HamburgerMenu({ isOpen, onClose }) {
   const navigate = useNavigate();
-  let member = null;
-
-  try {
-    const savedMember = localStorage.getItem("member");
-    member = savedMember ? JSON.parse(savedMember) : null;
-  } catch {
-    localStorage.removeItem("member");
-  }
+  const member = getStoredMember();
 
   const handleLogout = () => {
-    localStorage.removeItem("member");
+    clearMemberSession();
     onClose();
     navigate("/");
   };
@@ -97,9 +95,7 @@ function HamburgerMenu({ isOpen, onClose }) {
             <span className="profile-icon" aria-hidden="true">
               <img
                 src={
-                  member?.profileImage ||
-                  member?.profile_image ||
-                  "/icons/my.svg"
+                  member ? getMemberProfileImage(member) : "/icons/my.svg"
                 }
                 alt=""
               />

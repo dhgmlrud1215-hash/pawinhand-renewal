@@ -18,6 +18,11 @@ import {
   serviceMenus,
   snsMenus,
 } from "../../data/memberData";
+import {
+  clearMemberSession,
+  getMemberProfileImage,
+  getStoredMember,
+} from "../../utils/memberStorage";
 
 const iconComponents = {
   membership: BadgeCheck,
@@ -105,22 +110,12 @@ function MenuSection({ title, items, external = false }) {
   );
 }
 
-function getSavedMember() {
-  try {
-    const savedMember = localStorage.getItem("member");
-    return savedMember ? JSON.parse(savedMember) : null;
-  } catch {
-    localStorage.removeItem("member");
-    return null;
-  }
-}
-
 function MyPage() {
   const navigate = useNavigate();
-  const member = getSavedMember();
+  const member = getStoredMember();
 
   const handleLogout = () => {
-    localStorage.removeItem("member");
+    clearMemberSession();
     alert("로그아웃되었습니다.");
     navigate("/");
   };
@@ -166,14 +161,10 @@ function MyPage() {
         {member ? (
           <div className="mypage-member-heading">
             <div className="mypage-member-avatar">
-              {member.profileImage || member.profile_image ? (
-                <img
-                  src={member.profileImage || member.profile_image}
-                  alt={`${member.nickname || member.name} 프로필`}
-                />
-              ) : (
-                <UserRound strokeWidth={1.8} aria-hidden="true" />
-              )}
+              <img
+                src={getMemberProfileImage(member)}
+                alt={`${member.nickname || member.name} 프로필`}
+              />
             </div>
             <div>
               <h1>{member.nickname || member.name}님, 반가워요.</h1>

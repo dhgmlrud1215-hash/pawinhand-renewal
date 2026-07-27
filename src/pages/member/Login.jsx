@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { saveMemberSession } from "../../utils/memberStorage";
 
 function Login() {
   const navigate = useNavigate();
@@ -35,7 +36,7 @@ function Login() {
       alert(data.message);
 
       if (data.success) {
-        localStorage.setItem("member", JSON.stringify(data.member));
+        saveMemberSession(data.member);
         navigate("/mypage");
       }
     } catch (error) {
