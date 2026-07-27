@@ -2,7 +2,7 @@ import { useRef, useState } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
 import { Camera, ChevronLeft, X } from "lucide-react";
 import { updateMember } from "../../api/memberApi";
-import { useAuth } from "../../context/AuthContext";
+import { useAuth } from "../../context/authContext";
 import {
   DEFAULT_PROFILE_IMAGE,
   getMemberCoverImage,
