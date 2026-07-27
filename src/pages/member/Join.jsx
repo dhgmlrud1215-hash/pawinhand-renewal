@@ -8,6 +8,10 @@ import AgreementList from "../../components/member/AgreementList";
 
 import "../../css/member.css";
 
+const MEMBER_API_BASE_URL =
+  import.meta.env.VITE_MEMBER_API_BASE_URL ||
+  "https://dhgmlrud00.dothome.co.kr/server/member";
+
 const initialForm = {
   userId: "",
   password: "",
@@ -134,16 +138,42 @@ function Join() {
 
     if (!validate()) return;
 
-    // PHP API 연결 전 확인용
-    console.log({
-      ...form,
-      agreements,
-    });
+    try {
+      const response = await fetch(`${MEMBER_API_BASE_URL}/join.php`, {
+        method: "POST",
+        headers: {
+          // PHP reads the raw body, so this remains JSON while avoiding the
+          // OPTIONS preflight unsupported by the current hosting server.
+          "Content-Type": "text/plain;charset=UTF-8",
+        },
+        body: JSON.stringify({
+          ...form,
+          marketing: agreements.marketing,
+        }),
+      });
 
-    alert("회원가입 입력 확인이 완료되었습니다.");
-    navigate("/login");
+      const responseText = await response.text();
+      let data;
+
+      try {
+        data = JSON.parse(responseText);
+      } catch {
+        throw new Error("서버 응답을 확인할 수 없습니다.");
+      }
+
+      if (!response.ok) {
+        throw new Error(data.message || "회원가입 요청에 실패했습니다.");
+      }
+
+      alert(data.message);
+
+      if (data.success) {
+        navigate("/login");
+      }
+    } catch (error) {
+      alert(error.message || "회원가입 중 오류가 발생했습니다.");
+    }
   };
-
   return (
     <MemberForm
       title="회원가입"

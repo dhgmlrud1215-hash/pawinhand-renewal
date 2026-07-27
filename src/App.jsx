@@ -43,6 +43,8 @@ import BenefitDetail from "./pages/BenefitDetail";
 import Login from "./pages/member/Login";
 import Join from "./pages/member/Join";
 import MyPage from "./pages/member/MyPage";
+import Profile from "./pages/member/Profile";
+import EditProfile from "./pages/member/EditProfile";
 
 function App() {
   return (
@@ -82,6 +84,8 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/join" element={<Join />} />
         <Route path="/mypage" element={<MyPage />} />
+        <Route path="/mypage/profile" element={<Profile />} />
+        <Route path="/mypage/edit" element={<EditProfile />} />
 
         <Route
           path="/campaign"

@@ -1,6 +1,22 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function HamburgerMenu({ isOpen, onClose }) {
+  const navigate = useNavigate();
+  let member = null;
+
+  try {
+    const savedMember = localStorage.getItem("member");
+    member = savedMember ? JSON.parse(savedMember) : null;
+  } catch {
+    localStorage.removeItem("member");
+  }
+
+  const handleLogout = () => {
+    localStorage.removeItem("member");
+    onClose();
+    navigate("/");
+  };
+
   const menuItems = [
     {
       title: "입양하기",
@@ -74,26 +90,56 @@ function HamburgerMenu({ isOpen, onClose }) {
           </button>
         </div>
 
-        <div className="hamburger-login">
+        <div
+          className={`hamburger-login${member ? " hamburger-login-member" : ""}`}
+        >
           <div className="hamburger-profile">
             <span className="profile-icon" aria-hidden="true">
-              <img src="/icons/my.svg" alt="" />
+              <img
+                src={
+                  member?.profileImage ||
+                  member?.profile_image ||
+                  "/icons/my.svg"
+                }
+                alt=""
+              />
             </span>
 
             <div>
-              <strong>로그인해 주세요</strong>
-              <p>더 많은 포인핸드 서비스를 이용해 보세요.</p>
+              <strong>
+                {member
+                  ? `${member.nickname || member.name || member.user_id}님`
+                  : "로그인해 주세요"}
+              </strong>
+              <p>
+                {member
+                  ? member.email
+                  : "더 많은 포인핸드 서비스를 이용해 보세요."}
+              </p>
             </div>
           </div>
 
           <div className="hamburger-login-buttons">
-            <Link to="/login" onClick={onClose}>
-              로그인
-            </Link>
+            {member ? (
+              <>
+                <Link to="/mypage" onClick={onClose}>
+                  마이페이지
+                </Link>
+                <button type="button" onClick={handleLogout}>
+                  로그아웃
+                </button>
+              </>
+            ) : (
+              <>
+                <Link to="/login" onClick={onClose}>
+                  로그인
+                </Link>
 
-            <Link to="/join" onClick={onClose}>
-              회원가입
-            </Link>
+                <Link to="/join" onClick={onClose}>
+                  회원가입
+                </Link>
+              </>
+            )}
           </div>
         </div>
 

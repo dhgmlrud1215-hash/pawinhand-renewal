@@ -1,8 +1,11 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
   BadgeCheck,
+  BookHeart,
   CircleHelp,
   ClipboardPenLine,
+  FilePenLine,
+  HouseHeart,
   Mail,
   Megaphone,
   MessageSquareText,
@@ -21,7 +24,11 @@ const iconComponents = {
   adoption: ClipboardPenLine,
   message: Mail,
   login: UserRound,
+  profile: UserRound,
   pets: PawPrint,
+  shelters: HouseHeart,
+  stories: BookHeart,
+  posts: FilePenLine,
   notice: Megaphone,
   help: CircleHelp,
   sms: MessageSquareText,
@@ -40,56 +47,151 @@ function MenuIcon({ item }) {
     );
   }
 
-  if (item.icon) {
-    return <img className="mypage-brand-icon" src={item.icon} alt="" />;
-  }
-
-  return (
-    <span className="mypage-menu-symbol" aria-hidden="true">
-      {item.symbol}
-    </span>
-  );
+  return <img className="mypage-brand-icon" src={item.icon} alt="" />;
 }
 
 function MenuSection({ title, items, external = false }) {
   return (
-    <section className="mypage-menu-section">
+    <section
+      className={`mypage-menu-section${external ? " mypage-sns-section" : ""}`}
+    >
       <h2>{title}</h2>
 
       <div className="mypage-menu-list">
-        {items.map((item) =>
-          external ? (
-            <a
-              className="mypage-menu-row"
-              href={item.href}
-              target="_blank"
-              rel="noreferrer"
-              key={item.id}
-            >
+        {items.map((item) => {
+          const content = (
+            <>
               <MenuIcon item={item} />
               <span>{item.title}</span>
               <strong aria-hidden="true">›</strong>
-            </a>
-          ) : (
+            </>
+          );
+
+          if (item.onClick) {
+            return (
+              <button
+                className="mypage-menu-row"
+                type="button"
+                onClick={item.onClick}
+                key={item.id}
+              >
+                {content}
+              </button>
+            );
+          }
+
+          if (external) {
+            return (
+              <a
+                className="mypage-menu-row"
+                href={item.href}
+                target="_blank"
+                rel="noreferrer"
+                key={item.id}
+              >
+                {content}
+              </a>
+            );
+          }
+
+          return (
             <Link className="mypage-menu-row" to={item.path} key={item.id}>
-              <MenuIcon item={item} />
-              <span>{item.title}</span>
-              <strong aria-hidden="true">›</strong>
+              {content}
             </Link>
-          ),
-        )}
+          );
+        })}
       </div>
     </section>
   );
 }
 
+function getSavedMember() {
+  try {
+    const savedMember = localStorage.getItem("member");
+    return savedMember ? JSON.parse(savedMember) : null;
+  } catch {
+    localStorage.removeItem("member");
+    return null;
+  }
+}
+
 function MyPage() {
+  const navigate = useNavigate();
+  const member = getSavedMember();
+
+  const handleLogout = () => {
+    localStorage.removeItem("member");
+    alert("로그아웃되었습니다.");
+    navigate("/");
+  };
+
+  const memberMenus = member
+    ? [
+        {
+          id: "profile",
+          title: "프로필",
+          iconKey: "profile",
+          path: "/mypage/profile",
+        },
+        {
+          id: "favorite-animals",
+          title: "관심 유기동물",
+          iconKey: "pets",
+          path: "/mypage/favorites",
+        },
+        {
+          id: "favorite-shelters",
+          title: "관심 보호소",
+          iconKey: "shelters",
+          path: "/mypage/favorite-shelters",
+        },
+        {
+          id: "favorite-stories",
+          title: "관심 스토리",
+          iconKey: "stories",
+          path: "/mypage/favorite-stories",
+        },
+        {
+          id: "my-posts",
+          title: "내가 쓴 글",
+          iconKey: "posts",
+          path: "/mypage/posts",
+        },
+      ]
+    : myMenus;
+
   return (
     <main className="mypage-page">
       <section className="mypage-main">
-        <h1>
-          <Link to="/login">로그인</Link>을 해주세요.
-        </h1>
+        {member ? (
+          <div className="mypage-member-heading">
+            <div className="mypage-member-avatar">
+              {member.profileImage || member.profile_image ? (
+                <img
+                  src={member.profileImage || member.profile_image}
+                  alt={`${member.nickname || member.name} 프로필`}
+                />
+              ) : (
+                <UserRound strokeWidth={1.8} aria-hidden="true" />
+              )}
+            </div>
+            <div>
+              <h1>{member.nickname || member.name}님, 반가워요.</h1>
+              <p>{member.email}</p>
+            </div>
+            <button
+              className="mypage-logout-button"
+              type="button"
+              onClick={handleLogout}
+            >
+              로그아웃
+            </button>
+          </div>
+        ) : (
+          <h1>
+            <Link to="/login">로그인</Link> 해주세요.
+          </h1>
+        )}
 
         <div className="mypage-quick-list">
           {myQuickMenus.map((menu) => (
@@ -100,7 +202,7 @@ function MyPage() {
           ))}
         </div>
 
-        <MenuSection title="마이메뉴" items={myMenus} />
+        <MenuSection title="마이메뉴" items={memberMenus} />
       </section>
 
       <div className="mypage-divider" />
