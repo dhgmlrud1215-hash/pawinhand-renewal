@@ -9,7 +9,7 @@ import MyMenuList, {
   MyMenuIcon,
 } from "../../components/member/MyMenuList";
 import Myprofile from "../../components/member/Myprofile";
-import { useAuth } from "../../context/AuthContext";
+import { useAuth } from "../../context/authContext";
 
 function MyPage() {
   const navigate = useNavigate();
