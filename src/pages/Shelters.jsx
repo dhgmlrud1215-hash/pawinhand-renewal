@@ -18,8 +18,7 @@ function Shelters() {
     "대전",
     "세종",
     "전북",
-    "전남",
-    "광주",
+    "전남광주통합특별시",
     "경북",
     "경남",
     "대구",
@@ -28,11 +27,20 @@ function Shelters() {
     "제주",
   ];
 
+  const regionPrefixes = {
+    충북: "충청북도",
+    충남: "충청남도",
+    경북: "경상북도",
+    경남: "경상남도",
+  };
+
   const filteredShelters =
     selectedRegion === "전체"
       ? shelters
       : shelters.filter((shelter) =>
-          shelter.region.startsWith(selectedRegion)
+          shelter.region.startsWith(
+            regionPrefixes[selectedRegion] ?? selectedRegion
+          )
         );
 
   return (

@@ -971,7 +971,138 @@ extraSupport: [
     description: "'유한클로락스 입양 응원 패키지' 신청 시 제품 증정",
     logo: "/images/animals/clorox_symbol.png",
   },
-],
+  ],
+  }
+  ,
+  {
+    id: "gyeonggi-yangpyeong-2026-00172",
+    name: "경기-양평-2026-00172",
+
+    image: "/images/animals/animal09-1.jpg",
+
+    images: [
+      "/images/animals/animal09-1.jpg",
+      "/images/animals/animal09-2.jpg",
+      "/images/animals/animal09-3.jpg",
+      "/images/animals/animal09-4.jpg",
+      "/images/animals/animal09-5.png",
+      "/images/animals/animal09-6.png",
+    ],
+
+    video: null,
+
+    region: "경기도",
+    city: "양평군",
+    type: "강아지",
+    breed: "믹스견",
+    gender: "남아",
+    neutered: "미완료",
+    color: "흰색",
+    birthYear: "2026",
+    weight: "3.7kg",
+    info: "2026(년생) | 남아(중성화X) | 3.7kg",
+
+    noticeNumber: "경기-양평-2026-00172",
+    noticePeriod: "20260630 ~ 20260710",
+    foundPlace: "경기도 양평읍 오빈1리길12번길 11-8",
+    specialNote: "처진 양쪽 귀, 뾰족뾰족 털, 겁이 많음",
+    shelterName: "양평군유기동물보호소",
+    shelterTel: "031-770-2337",
+    office: "경기도 양평군",
+
+    personality: {
+      health: 5,
+      activity: 4,
+      sociability: 4,
+      friendliness: 4,
+    },
+
+    tags: [
+      "🙈 낯가림있음",
+      "😳 겁이많음",
+      "🐾 활동량보통",
+      "🔭 호기심많음",
+    ],
+
+    personalityText: `🫧🐶 "처음엔 세상이 조금 무서웠던 아이예요."
+
+처음 이곳에 왔을 때는 모든 것이 낯설고 무서워 조심조심 눈치만 보던 아이였어요.
+하지만 지금은 달라졌답니다.
+
+사람의 따뜻한 손길을 알게 된 이 아이는 이제 먼저 다가와 꼬리를 흔들고, "만져주세요! 놀아주세요!" 하며 애교를 부려요.
+
+낯선 사람에게도 스스럼없이 다가가 사랑을 표현하는 애교쟁이랍니다. 쓰다듬어 주면 행복한 표정을 지으며 사람 곁을 졸졸 따라다니는 모습이 정말 사랑스러워요.
+
+이 아이는 누군가의 가족이 되어 마음껏 사랑받을 준비를 마쳤습니다.
+평생 함께할 따뜻한 가족을 기다리고 있어요.
+
+이 작은 행복이 되어줄 아이에게 소중한 인연이 찾아오길 바랍니다.
+
+"사랑을 받은 만큼, 더 큰 사랑으로 보답해 줄 아이입니다."
+
+[양평군 유기동물보호센터 펌]
+📞 입양문의 031-770-2311
+연중무휴 09:00~18:00 (점심시간 12:00~13:00)`,
+
+    health: {
+      parvo: "음성",
+      corona: "음성",
+      heartworm: "미입력",
+      distemper: "음성",
+    },
+
+    contactInfo: [
+      {
+        name: "양평군유기동물보호소",
+        tel: "031-770-2311",
+        time: "연중무휴 09:00~18:00 (점심시간 12:00~13:00)",
+        note: "전화 문의는 보호소 운영시간 확인 후 이용 바랍니다.",
+      },
+    ],
+
+    adoptionSupport: {
+      title: "양평군유기동물보호소 입양 절차 및 입양비 지원사업 안내",
+      items: [
+        {
+          title: "입양절차",
+          content: [
+            "입양신청서 작성",
+            "담당자가 신청서 검토 후 개별 연락 (교육 이수: 온라인)",
+            "방문상담",
+            "입양확정 시 개별 연락",
+            "입양방문 시 입양확인서 및 동물등록신청서 작성",
+          ],
+        },
+        {
+          title: "지원항목",
+          content: [
+            "진단, 치료, 백신 접종, 중성화, 미용비",
+          ],
+        },
+        {
+          title: "지원비용",
+          content: [
+            "250,000원 이상 사용 시 60%인 150,000원 지원",
+            "이용 금액이 250,000원이 안 되는 경우 해당 금액의 60% 지원",
+          ],
+        },
+      ],
+    },
+
+    extraSupport: [
+      {
+        company: "힐스",
+        title: "힐스×포인핸드 캠페인 대상",
+        description: "힐스 사료 급여 중이며 입양 시 힐스 입양 선물 증정",
+        logo: "/images/animals/hils_logo.png",
+      },
+      {
+        company: "유한클로락스",
+        title: "유한클로락스 캠페인 대상",
+        description: "'유한클로락스 입양 응원 패키지' 신청 시 제품 증정",
+        logo: "/images/animals/clorox_symbol.png",
+      },
+    ],
   }
 ]
 
