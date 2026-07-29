@@ -28,7 +28,7 @@ function PetFilter({ selectedFilters, onChange }) {
       "충청북도",
       "충청남도",
       "전북특별자치도",
-      "전라남도",
+      "전남광주통합특별시",
       "경상북도",
       "경상남도",
       "제주특별자치도",

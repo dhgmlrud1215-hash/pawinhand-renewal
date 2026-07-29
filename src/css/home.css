@@ -197,6 +197,125 @@
   border-radius: 5px;
 }
 
+.pet-card-image,
+.animal-list-image {
+  position: relative;
+  overflow: hidden;
+  border-radius: 10px;
+}
+
+.pet-card-image img {
+  border-radius: inherit;
+}
+
+.recommend-badge {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  padding: 5px 8px;
+  border-radius: 999px;
+  background: #ff7138;
+  color: #fff;
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.pet-location {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  left: 10px;
+  overflow: hidden;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+  text-overflow: ellipsis;
+  text-shadow: 0 1px 5px rgba(0, 0, 0, 0.75);
+  white-space: nowrap;
+}
+
+.animal-list-page {
+  width: min(100% - 32px, 980px);
+  min-height: 70vh;
+  margin: 0 auto;
+  padding: 18px 0 60px;
+}
+
+.animal-list-header,
+.animal-detail-toolbar {
+  display: grid;
+  grid-template-columns: 48px 1fr 48px;
+  align-items: center;
+  min-height: 52px;
+}
+
+.animal-list-header h2 {
+  font-size: 21px;
+  text-align: center;
+}
+
+.animal-list-header button,
+.animal-detail-toolbar button {
+  border: 0;
+  background: transparent;
+  color: #222;
+  font-size: 34px;
+  line-height: 1;
+}
+
+.animal-list-header > span {
+  color: #888;
+  font-size: 12px;
+  text-align: right;
+}
+
+.animal-list-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px 14px;
+  margin-top: 24px;
+}
+
+.animal-list-card {
+  min-width: 0;
+  color: inherit;
+}
+
+.animal-list-image img {
+  width: 100%;
+  aspect-ratio: 1 / 0.82;
+  object-fit: cover;
+}
+
+.animal-list-name {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.animal-list-name strong {
+  overflow: hidden;
+  font-size: 15px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.animal-list-name span {
+  flex-shrink: 0;
+  font-size: 23px;
+}
+
+.animal-list-card p {
+  overflow: hidden;
+  margin-top: 5px;
+  color: #666;
+  font-size: 13px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 .pet-card strong,
 .pet-card p {
   white-space: nowrap;
@@ -262,6 +381,156 @@
 .animal-detail {
   width: min(100% - 32px, 1180px);
   margin: 32px auto 0;
+}
+
+.animal-detail-simple {
+  width: min(100%, 720px);
+  margin-top: 0;
+  padding-bottom: 48px;
+}
+
+.animal-detail-toolbar {
+  padding: 0 12px;
+}
+
+.animal-detail-toolbar > div {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.animal-detail-toolbar > div button {
+  width: 40px;
+  font-size: 25px;
+}
+
+.animal-detail-simple .animal-gallery {
+  max-width: none;
+  margin-bottom: 0;
+}
+
+.animal-detail-simple .animal-gallery-main {
+  border-radius: 0;
+}
+
+.animal-detail-simple .animal-main-img {
+  aspect-ratio: 4 / 3;
+}
+
+.animal-basic-card {
+  position: relative;
+  z-index: 2;
+  margin-top: -14px;
+  padding: 26px 20px 22px;
+  border-radius: 20px 20px 0 0;
+  background: #fff;
+}
+
+.animal-basic-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 22px;
+}
+
+.animal-basic-title h2 {
+  margin: 0;
+  font-size: 24px;
+}
+
+.animal-basic-title span {
+  padding: 5px 9px;
+  border: 1px solid #ff7138;
+  border-radius: 999px;
+  color: #ff7138;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.animal-basic-list {
+  display: grid;
+  gap: 13px;
+}
+
+.animal-basic-list div {
+  display: grid;
+  grid-template-columns: 88px minmax(0, 1fr);
+  gap: 14px;
+}
+
+.animal-basic-list dt {
+  color: #555;
+  font-weight: 700;
+}
+
+.animal-basic-list dd {
+  margin: 0;
+  line-height: 1.45;
+}
+
+.animal-basic-list .point {
+  color: #ff7138;
+}
+
+.shelter-basic-info {
+  margin-top: 24px;
+  padding-top: 22px;
+  border-top: 1px solid #eee;
+}
+
+.shelter-basic-info h3 {
+  margin: 0 0 14px;
+  font-size: 17px;
+}
+
+.shelter-basic-info strong,
+.shelter-basic-info p,
+.shelter-basic-info a {
+  display: block;
+  margin: 5px 0;
+  font-size: 14px;
+}
+
+.shelter-basic-info p {
+  color: #666;
+}
+
+.adoption-contact-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 52px;
+  margin-top: 22px;
+  border-radius: 8px;
+  background: #ff651f;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 800;
+}
+
+.simple-extra-support {
+  margin: 0 20px;
+}
+
+.simple-extra-support h3 {
+  margin-bottom: 18px;
+}
+
+.animal-not-found {
+  padding: 80px 20px;
+  text-align: center;
+}
+
+@media (min-width: 640px) {
+  .animal-list-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 32px 20px;
+  }
+}
+
+@media (min-width: 900px) {
+  .animal-list-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
 }
 
 .animal-gallery {

@@ -294,14 +294,13 @@ function EditProfile() {
             <option>부산광역시</option>
             <option>대구광역시</option>
             <option>대전광역시</option>
-            <option>광주광역시</option>
             <option>울산광역시</option>
             <option>세종특별자치시</option>
             <option>강원특별자치도</option>
             <option>충청북도</option>
             <option>충청남도</option>
             <option>전북특별자치도</option>
-            <option>전라남도</option>
+            <option>전남광주통합특별시</option>
             <option>경상북도</option>
             <option>경상남도</option>
             <option>제주특별자치도</option>

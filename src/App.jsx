@@ -27,6 +27,7 @@ import AnimalStats from "./components/AnimalState";
 
 
 import AnimalDetail from "./pages/AnimalDetail";
+import AnimalList from "./pages/AnimalList";
 import CulturePage from "./pages/CulturePage";
 import NewsList from "./pages/NewsList";
 import NewsDetail from "./pages/NewsDetail";
@@ -77,6 +78,7 @@ function App() {
         />
 
         <Route path="/animal/:id" element={<AnimalDetail />} />
+        <Route path="/animals" element={<AnimalList />} />
         <Route path="/intro" element={<Intro />} />
         <Route path="/sponsor" element={<Sponsor />} />
         <Route path="/benefit" element={<BenefitList />} />
