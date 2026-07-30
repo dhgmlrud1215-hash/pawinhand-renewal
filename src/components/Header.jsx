@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import HamburgerMenu from "./HamburgerMenu";
+import NotificationPanel from "./NotificationPanel";
+import "../css/notification.css";
 
 const STORE_OPEN_MINUTES = 11 * 60;
 const STORE_CLOSE_MINUTES = 19 * 60;
@@ -21,7 +23,9 @@ function getSeoulMinutes(date) {
 function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isLocationOpen, setIsLocationOpen] = useState(false);
+  const [isNotificationOpen, setIsNotificationOpen] = useState(false);
   const [currentTime, setCurrentTime] = useState(() => new Date());
+ 
 
   const currentSeoulMinutes = getSeoulMinutes(currentTime);
   const isStoreOpen =
@@ -150,10 +154,24 @@ function Header() {
             )}
           </div>
 
-          <button type="button" className="alarm-btn">
-            <img src="/icons/alarm.svg" alt="알림" />
-            <span className="notification-dot"></span>
+          <button 
+              type="button" 
+              className="alarm-btn"
+              aria-label="알림 보기"
+              aria-expanded={isNotificationOpen}
+              onClick={() => {
+                setIsNotificationOpen((prev) => !prev);
+            }}
+            >
+              <img src="/icons/alarm.svg" alt="알림" />
+              <span className="notification-dot"></span>
           </button>
+
+          {isNotificationOpen && (
+            <NotificationPanel
+              onClose={() => setIsNotificationOpen(false)}
+            />
+          )}
 
           <button
             type="button"
