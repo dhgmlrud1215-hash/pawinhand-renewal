@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import animals from "../data/animals";
 
 function HelpSection() {
-  const recommendedAnimals = animals.slice(0, 4);
+  const recommendedAnimals = animals.slice(0, 7);
 
   return (
     <section className="help-section home-section">

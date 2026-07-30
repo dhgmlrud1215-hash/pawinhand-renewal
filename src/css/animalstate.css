@@ -165,4 +165,9 @@
   .app {
     padding-bottom: 0;
   }
+
+  /* 고정 통계 카드가 푸터의 회사정보를 가리지 않도록 스크롤 여유 확보 */
+  .animal-stats + .footer {
+    margin-bottom: 150px;
+  }
 }
