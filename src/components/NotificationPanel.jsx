@@ -1,4 +1,8 @@
+import { useAuth } from "../context/authStore";
+
 function NotificationPanel({ onClose }) {
+    const { member } = useAuth();
+
     return (
         <>
             <button 
@@ -12,12 +16,15 @@ function NotificationPanel({ onClose }) {
                 <div className="notification-header">
                     <h2>알림</h2>
 
-                    <button type="button" className="read-all-btn">
-                        모두 읽음
-                    </button>
+                    {member && (
+                        <button type="button" className="read-all-btn">
+                            모두 읽음
+                        </button>
+                    )}
                 </div>
 
-                <ul className="notification-list">
+                {member ? (
+                  <ul className="notification-list">
                     <li className="notification-item unread">
                         <button type="button">
                             <div className="notification-icon">♥</div>
@@ -57,7 +64,14 @@ function NotificationPanel({ onClose }) {
                             알림 전체보기
                         </button>
                     </li>
-                </ul>
+                  </ul>
+                ) : (
+                  <div className="notification-empty">
+                    <span aria-hidden="true">🔔</span>
+                    <p>알림이 없습니다.</p>
+                    <small>로그인하면 새로운 소식을 확인할 수 있어요.</small>
+                  </div>
+                )}
             </div>
         </>
     );
