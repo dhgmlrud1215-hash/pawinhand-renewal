@@ -165,11 +165,11 @@
 @media (max-width: 767px) {
   .notification-panel {
     position: fixed;
-    top: 62px;
+    top: calc(62px + var(--iframe-safe-top));
     right: 16px;
     left: 16px;
     width: auto;
-    max-height: calc(100vh - 80px);
+    max-height: calc(100vh - 80px - var(--iframe-safe-top));
     border: 1px solid #e8e8e8;
     border-radius: 20px;
   }
