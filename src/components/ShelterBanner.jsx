@@ -9,7 +9,7 @@ function ShelterBanner() {
 
           <div>
             <strong>내 주변 보호소 찾기</strong>
-            <p>가까운 보호소에서 마음을 기다리는 아이들을 만나보세요</p>
+            <p>가까운 보호소의 아이들을 만나보세요.</p>
           </div>
         </div>
 
