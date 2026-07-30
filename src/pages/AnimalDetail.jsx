@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useParams } from "react-router-dom";
 import animals from "../data/animals";
+import { shelters } from "../data/shelters";
 
 function AnimalDetail() {
   const { id } = useParams();
@@ -14,14 +15,21 @@ function AnimalDetail() {
     ...(animal.video ? [{ type: "video", src: animal.video }] : []),
   ];
   const currentItem = galleryItems[currentIndex];
+  const shelter = shelters.find((item) => item.name === animal.shelterName);
 
   return (
     <main className="animal-detail animal-detail-simple">
-      <div className="animal-detail-toolbar">
-        <button type="button" onClick={() => window.history.back()} aria-label="뒤로가기">‹</button>
-        <div>
-          <button type="button" aria-label="공유하기">↗</button>
-          <button type="button" aria-label="관심동물 등록">♡</button>
+      <div className="animal-shelter-heading">
+        <span className="animal-shelter-icon" aria-hidden="true">
+          <img src="/icons/shelter2.png" alt="" />
+        </span>
+        <div className="animal-shelter-name">
+          <strong>{animal.shelterName}</strong>
+          {shelter?.verified && (
+            <span className="animal-shelter-badge" aria-label="인증 보호소">
+              ✓
+            </span>
+          )}
         </div>
       </div>
 
@@ -73,13 +81,6 @@ function AnimalDetail() {
           <div><dt>발견장소</dt><dd>{animal.foundPlace}</dd></div>
           <div><dt>특이사항</dt><dd>{animal.specialNote}</dd></div>
         </dl>
-
-        <div className="shelter-basic-info">
-          <h3>보호소 정보</h3>
-          <strong>{animal.shelterName}</strong>
-          <p>{animal.office}</p>
-          <a href={`tel:${animal.shelterTel}`}>{animal.shelterTel}</a>
-        </div>
 
         <a className="adoption-contact-button" href={`tel:${animal.shelterTel}`}>
           입양 문의하기

@@ -395,6 +395,62 @@
   padding-bottom: 48px;
 }
 
+.animal-shelter-heading {
+  display: flex;
+  min-height: 64px;
+  padding: 0 18px;
+  align-items: center;
+  gap: 10px;
+  box-sizing: border-box;
+  background: #fff;
+}
+
+.animal-shelter-icon {
+  display: flex;
+  flex: 0 0 38px;
+  width: 38px;
+  height: 38px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: #fff3eb;
+}
+
+.animal-shelter-icon img {
+  width: 25px;
+  height: 25px;
+  object-fit: contain;
+}
+
+.animal-shelter-name {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  gap: 7px;
+}
+
+.animal-shelter-name strong {
+  overflow: hidden;
+  color: #222;
+  font-size: 16px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.animal-shelter-badge {
+  display: inline-flex;
+  flex: 0 0 17px;
+  width: 17px;
+  height: 17px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: #159765;
+  color: #fff;
+  font-size: 11px;
+  font-weight: 800;
+}
+
 .animal-detail-toolbar {
   padding: 0 12px;
 }
@@ -410,6 +466,7 @@
 }
 
 .animal-detail-simple .animal-gallery {
+  display: block;
   max-width: none;
   margin-bottom: 0;
 }
