@@ -53,6 +53,12 @@
   margin: 0 0 18px;
 }
 
+@media (max-width: 767px) {
+  .quick-menu h2 {
+    padding-left: 6px;
+  }
+}
+
 .quick-list {
   display:flex;
   justify-content: space-between;
